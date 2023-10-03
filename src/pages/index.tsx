@@ -1,11 +1,9 @@
-'use client';
-
 import {motion} from 'framer-motion'
 import Link from 'next/link';
 import { useCursor } from '@/shared/hooks';
 import { transition1 } from '@/shared/constants/transitions';
 
-export const Home = () => {
+const Home = () => {
 
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor()
 
@@ -28,3 +26,4 @@ export const Home = () => {
   </motion.section>;
 };
 
+export default Home;
