@@ -1,11 +1,25 @@
 import { motion } from 'framer-motion';
-import { ContactForm } from '@/components/ContactForm';
 import { transition1 } from '@/shared/constants/transitions';
 import { useCursor } from '@/shared/hooks';
+import { GetStaticProps } from 'next';
+import client from '../../../contentful/index';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { BLOCKS } from '@contentful/rich-text-types';
+import { SendContactForm } from '@/features';
 
-const Contact = () => {
+const Contact = ({ contactPageContent }: any) => {
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
 
+  const title = contactPageContent.fields?.title || 'Name has been changed :C';
+
+  const subtitle = documentToHtmlString(contactPageContent.fields?.subtitle, {
+    renderNode: {
+      [BLOCKS.PARAGRAPH]: (node, next) => next(node.content),
+    },
+  });
+
+  const personImg = contactPageContent.fields?.image.fields.file.url || '';
+  
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -28,39 +42,11 @@ const Contact = () => {
             transition={transition1}
             className="lg:flex-1 lg:pt-32 px-4"
           >
-            <h1 className="h1">Contact me</h1>
+            <h1 className="h1">{title}</h1>
 
-            <p className="mb-12">I would love to get suggestions from you.</p>
+            <p className="mb-12">{subtitle}</p>
 
-            <ContactForm />
-            {/* <form  className="flex flex-col gap-y-4">
-              <div className="flex gap-x-10">
-                <input
-              
-                  className="outline-none border-b border-b-rose-300 h-[60px] bg-transparent  w-full pl-3 placeholder:text-[#757879]"
-                  type="text"
-                  placeholder="Your name"
-                />
-                <input
-                 
-                  className="outline-none border-b border-b-primary h-[60px] bg-transparent  w-full pl-3 placeholder:text-[#757879]"
-                  type="text"
-                  placeholder="Your email address"
-                />
-              </div>
-              <input
-                
-                className="outline-none border-b border-b-primary h-[60px] bg-transparent  w-full pl-3 placeholder:text-[#757879]"
-                type="text"
-                placeholder="Your message"
-              />
-              <button
-                type="submit"
-                className="btn mt-[30px] mx-auto lg:max-0 self-start hover:rounded-bl-lg hover:tracking-widest"
-              >
-                Send it
-              </button>
-            </form> */}
+            <SendContactForm />
           </motion.div>
 
           <motion.div
@@ -72,7 +58,7 @@ const Contact = () => {
             transition={transition1}
             className="lg:flex-1 z-10"
           >
-            <img src="img/contact/woman.png" alt="" />
+            <img src={personImg ?? 'img/contact/woman.png'} alt="" />
           </motion.div>
         </div>
       </div>
@@ -81,3 +67,23 @@ const Contact = () => {
 };
 
 export default Contact;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const contactPage = await client.getEntries<any>({
+    content_type: 'contactPage',
+  });
+  const header = await client.getEntries<any>({
+    content_type: 'header',
+  });
+
+  const [headerContent] = header.items;
+  const [contactPageContent] = contactPage.items;
+
+  return {
+    props: {
+      headerContent,
+      contactPageContent,
+    },
+    revalidate: 3600,
+  };
+};

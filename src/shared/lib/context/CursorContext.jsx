@@ -11,7 +11,7 @@ export const CursorProvider = ({ children }) => {
 
   useEffect(() => {
     const mobileViewportIsActive = window.innerWidth < 768;
-    console.log('mobileViewportIsActive', mobileViewportIsActive);
+
     if (mobileViewportIsActive) {
       setCursorBg('none');
 
@@ -19,7 +19,10 @@ export const CursorProvider = ({ children }) => {
     }
 
     const move = (e) => {
-      console.log({ x: e.clientX, y: e.clientY });
+      console.log('asd', {
+        x: e.clientX,
+        y: e.clientY,
+      });
       setCursorPos({
         x: e.clientX,
         y: e.clientY,
@@ -89,11 +92,28 @@ export const CursorProvider = ({ children }) => {
   const mouseLeaveHandle = () =>
     !(window.innerWidth < 768) && setCursorBg('default');
 
+  const setCursorNone = () => setCursorBg('none');
+  const setCursorDefault = () => setCursorBg('default');
+
   return (
     <CursorContext.Provider
-      value={{ cursorVariants, cursorBg, mouseEnterHandle, mouseLeaveHandle }}
+      value={{
+        cursorVariants,
+        cursorBg,
+        mouseEnterHandle,
+        mouseLeaveHandle,
+        setCursorDefault,
+        setCursorNone,
+      }}
     >
       {children}
+      {/* <motion.div
+        variants={cursorVariants}
+        animate={cursorBg}
+        className={`${
+          cursorBg === 'none' && 'hidden'
+        } w-[32px] h-[32px] bg-primary fixed top-0 left-0 pointer-events-none z-50 rounded-full`}
+      /> */}
     </CursorContext.Provider>
   );
 };
