@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useCursor } from '@/shared/hooks';
 import { transition1 } from '@/shared/constants/transitions';
 import { GetStaticProps } from 'next';
-import  client from '../../contentful/index'
+import client from '../../contentful/index';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
@@ -102,7 +102,7 @@ export const getStaticProps: GetStaticProps = async () => {
       homePage: homePageContent,
       headerContent,
     },
-    revalidate: 3600,
+    revalidate: 10,
   };
 };
 

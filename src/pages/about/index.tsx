@@ -96,6 +96,6 @@ export const getStaticProps: GetStaticProps = async () => {
       aboutPageContent,
       headerContent,
     },
-    revalidate: 3600,
+    revalidate: 10,
   };
 };
