@@ -91,7 +91,7 @@ const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
         </div>
 
         {!!videos && (
-          <div className="block lg:grid grid-cols-2 lg:gap-4">
+          <div className="block lg:grid grid-cols-2 lg:gap-4 pb-5">
             {videos.map((item, idx) => (
               <div key={idx} className="mb-5 lg:mb-0">
                 <div
