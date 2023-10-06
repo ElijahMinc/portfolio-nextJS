@@ -19,22 +19,25 @@ class MailService {
     if (!this.transporter) return;
 
     const { message, name, email } = data;
-
-    await this.transporter.sendMail({
-      from: email,
-      to: process.env.NEXT_SMTP_USER!,
-      subject: `Повідомлення від:  Name: ${name};`,
-      // text: message,
-      html: `
-            <div>
-               <h1>Heeey! 🦄 There's a new message for you!</h1>
-					</br>
-					<h2>My Email: ${email} </h2>
-					</br>
-					<p>${message}</p>
-            </div>
-         `,
-    });
+    try {
+      await this.transporter.sendMail({
+        from: email,
+        to: process.env.NEXT_SMTP_USER!,
+        subject: `Повідомлення від:  Name: ${name};`,
+        // text: message,
+        html: `
+					<div>
+						<h1>Heeey! 🦄 There's a new message for you!</h1>
+						</br>
+						<h2>My Email: ${email} </h2>
+						</br>
+						<p>${message}</p>
+					</div>
+				`,
+      });
+    } catch (error) {
+      console.error('Error sending email', error);
+    }
   }
 }
 
