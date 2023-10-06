@@ -1,1 +1,1 @@
-export { HomeContent } from './Home'
+export * from './Form';
