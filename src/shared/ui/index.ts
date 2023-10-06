@@ -1,2 +1,3 @@
-export {Header} from './Header'
-export {Socials} from './Socials'
+export { Header } from './Header';
+export { Socials } from './Socials';
+export { Form } from './Form';
