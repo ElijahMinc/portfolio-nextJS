@@ -19,10 +19,10 @@ export const CursorProvider = ({ children }) => {
     }
 
     const move = (e) => {
-      console.log('asd', {
-        x: e.clientX,
-        y: e.clientY,
-      });
+      // console.log('asd', {
+      //   x: e.clientX,
+      //   y: e.clientY,
+      // });
       setCursorPos({
         x: e.clientX,
         y: e.clientY,

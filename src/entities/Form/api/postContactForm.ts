@@ -3,7 +3,7 @@ import axios from 'axios';
 export const postContactForm = async (values: any) => {
   try {
     const response = await axios.post(
-      'http://localhost:3000/api/send-email',
+      `${process.env.NEXT_PUBLIC_API_URL}/api/send-contact-info`,
       values,
     );
 

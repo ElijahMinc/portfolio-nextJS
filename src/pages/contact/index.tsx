@@ -19,7 +19,7 @@ const Contact = ({ contactPageContent }: any) => {
   });
 
   const personImg = contactPageContent.fields?.image.fields.file.url || '';
-  
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
