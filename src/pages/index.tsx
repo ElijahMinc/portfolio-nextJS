@@ -25,8 +25,6 @@ const Home = ({ homePage }: { homePage: any }) => {
     },
   });
 
-  console.log('homePage', homePage);
-
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -94,7 +92,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const [headerContent] = header.items;
 
-  console.log('homePage', homePage);
   const [homePageContent] = homePage.items;
 
   return {

@@ -18,16 +18,11 @@ export const CursorProvider = ({ children }) => {
       return;
     }
 
-    const move = (e) => {
-      // console.log('asd', {
-      //   x: e.clientX,
-      //   y: e.clientY,
-      // });
+    const move = (e) =>
       setCursorPos({
         x: e.clientX,
         y: e.clientY,
       });
-    };
 
     window.addEventListener('mousemove', move);
 

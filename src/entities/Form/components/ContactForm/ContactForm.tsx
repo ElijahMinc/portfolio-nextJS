@@ -1,6 +1,7 @@
 import { useInput } from '@/shared/hooks';
 import { isValidEmail } from '@/shared/lib/validate/isValidaEmail';
-import { FormInput } from '@/shared/ui/Form/FormInput';
+import { Button } from '@/shared/ui';
+import { Input } from '@/shared/ui/Input/Input';
 
 interface ContactFormProps {
   handleSubmit: any;
@@ -47,7 +48,7 @@ export const ContactForm = ({ handleSubmit }: ContactFormProps) => {
     <form onSubmit={submit} className="flex flex-col gap-y-4">
       <div className="flex gap-x-10">
         {/* <input className="outline-none border-b border-b-rose-300 h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879]" /> */}
-        <FormInput
+        <Input
           onChange={nameInputProvider.inputInfo.onChange}
           onBlur={nameInputProvider.inputInfo.onBlur}
           value={nameInputProvider.inputInfo.value}
@@ -55,7 +56,7 @@ export const ContactForm = ({ handleSubmit }: ContactFormProps) => {
           placeholder="Your name"
           isError={!nameInputProvider.validInput && !!nameInputProvider.isDirty}
         />
-        <FormInput
+        <Input
           onChange={emailInputProvider.inputInfo.onChange}
           onBlur={emailInputProvider.inputInfo.onBlur}
           value={emailInputProvider.inputInfo.value}
@@ -66,7 +67,7 @@ export const ContactForm = ({ handleSubmit }: ContactFormProps) => {
           }
         />
       </div>
-      <FormInput
+      <Input
         onChange={messageInputProvider.inputInfo.onChange}
         onBlur={messageInputProvider.inputInfo.onBlur}
         value={messageInputProvider.inputInfo.value}
@@ -76,7 +77,7 @@ export const ContactForm = ({ handleSubmit }: ContactFormProps) => {
           !messageInputProvider.validInput && !!messageInputProvider.isDirty
         }
       />
-      <button
+      <Button
         type="submit"
         onClick={() => {
           nameInputProvider.trigger();
@@ -86,7 +87,7 @@ export const ContactForm = ({ handleSubmit }: ContactFormProps) => {
         className="btn mt-[30px] mx-auto lg:max-0 self-start hover:rounded-bl-lg hover:tracking-widest"
       >
         Send it
-      </button>
+      </Button>
     </form>
   );
 };

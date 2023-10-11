@@ -21,6 +21,7 @@ export const getSocialIconByNames = (socialLink: string) => {
     return {
       name: '',
       path: null,
+      icon: null,
     };
   }
 
@@ -60,6 +61,10 @@ export const getSocialIconByNames = (socialLink: string) => {
         icon: <ImYoutube />,
       };
     default:
-      break;
+      return {
+        name: '',
+        path: null,
+        icon: null,
+      };
   }
 };

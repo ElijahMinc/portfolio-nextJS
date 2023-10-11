@@ -11,7 +11,6 @@ import { BLOCKS } from '@contentful/rich-text-types';
 
 const About = ({ aboutPageContent }: any) => {
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
-  console.log('aboutPageContent', aboutPageContent);
   const title = aboutPageContent.fields?.title || 'Name has been changed :C';
 
   const subtitle = documentToHtmlString(aboutPageContent.fields?.description, {
