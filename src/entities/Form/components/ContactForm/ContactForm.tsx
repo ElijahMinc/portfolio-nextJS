@@ -46,7 +46,7 @@ export const ContactForm = ({ handleSubmit }: ContactFormProps) => {
 
   return (
     <form onSubmit={submit} className="flex flex-col gap-y-4">
-      <div className="flex gap-x-10">
+      <div className="flex gap-10">
         {/* <input className="outline-none border-b border-b-rose-300 h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879]" /> */}
         <Input
           onChange={nameInputProvider.inputInfo.onChange}
