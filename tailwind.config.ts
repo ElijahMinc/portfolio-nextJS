@@ -1,10 +1,9 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     fontFamily: {
@@ -23,10 +22,10 @@ const config: Config = {
         grey: '#484B4B',
 
         accent: '#EEF7F9',
-        error: '#9a4141'
+        error: '#9a4141',
       },
     },
   },
   plugins: [],
-}
-export default config
+};
+export default config;

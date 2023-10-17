@@ -18,7 +18,7 @@ export const Socials = ({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        {!!socials.length &&
+        {!!socials?.length &&
           socials.map((socialLink) => {
             const socialData = getSocialIconByNames(socialLink);
 

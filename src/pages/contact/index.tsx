@@ -46,7 +46,44 @@ const Contact = ({ contactPageContent }: any) => {
 
             <p className="mb-12">{subtitle}</p>
 
-            <SendContactForm />
+            {/* <SendContactForm /> */}
+            <form  className="flex flex-col gap-y-4">
+      <div className="flex gap-10">
+        {/* <input className="outline-none border-b border-b-rose-300 h-[60px]" /> */}
+        {/* <input className="outline-none border-b border-b-rose-300 h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879]" /> */}
+        {/* <input className="outline-none border-b border-b-rose-300 h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879]" /> */}
+        <input
+ 
+        type="text"
+        placeholder="Your message"
+        className={
+          'outline-none border-b border-b-rose-300 h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879] transition-all'
+        }
+      />
+      </div>
+      {/* <input
+        onChange={messageInputProvider.inputInfo.onChange}
+        onBlur={messageInputProvider.inputInfo.onBlur}
+        value={messageInputProvider.inputInfo.value}
+        type="text"
+        placeholder="Your message"
+        className={
+          'outline-none border-b border-b-primary h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879] transition-all'
+        }
+      /> */}
+      {/* <Input
+        onChange={messageInputProvider.inputInfo.onChange}
+        onBlur={messageInputProvider.inputInfo.onBlur}
+        value={messageInputProvider.inputInfo.value}
+        type="text"
+        placeholder="Your message"
+        isError={
+          !messageInputProvider.validInput && !!messageInputProvider.isDirty
+        }
+      /> */}
+
+    </form>
+   {/* <input className="outline-none border-b border-b-rose-300 h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879]" /> */}
           </motion.div>
 
           <motion.div
