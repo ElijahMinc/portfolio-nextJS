@@ -17,7 +17,7 @@ const Home = ({ homePage }: { homePage: any }) => {
     },
   });
 
-  const personImg = homePage.fields?.person.fields.file.url || '';
+  const personImg = homePage.fields?.person?.fields.file.url || '';
 
   const buttonText = documentToHtmlString(homePage.fields?.homeButton, {
     renderNode: {
@@ -31,7 +31,7 @@ const Home = ({ homePage }: { homePage: any }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={transition1}
-      className="section overflow-y-scroll overflow-x-hidden"
+      className="section overflow-y-scroll overflow-x-hidden bg-slate-200"
     >
       <div className="container mx-auto h-full relative">
         <div className="flex flex-col justify-center">

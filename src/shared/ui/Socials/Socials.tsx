@@ -12,29 +12,27 @@ export const Socials = ({
   socials,
 }: SocialsProps) => {
   return (
-    <>
-      <ul
-        className="flex gap-x-4"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        {!!socials?.length &&
-          socials.map((socialLink) => {
-            const socialData = getSocialIconByNames(socialLink);
+    <ul
+      className="flex gap-10"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {!!socials?.length &&
+        socials.map((socialLink) => {
+          const socialData = getSocialIconByNames(socialLink);
 
-            if (!socialData.path) {
-              return null;
-            }
+          if (!socialData.path) {
+            return null;
+          }
 
-            return (
-              <li key={socialData.path}>
-                <a href={socialData.path} target="_blank">
-                  {socialData.icon}
-                </a>
-              </li>
-            );
-          })}
-      </ul>
-    </>
+          return (
+            <li key={socialData.path}>
+              <a href={socialData.path} target="_blank">
+                {socialData.icon}
+              </a>
+            </li>
+          );
+        })}
+    </ul>
   );
 };

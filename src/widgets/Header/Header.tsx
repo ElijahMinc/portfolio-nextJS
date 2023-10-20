@@ -59,7 +59,7 @@ export const Header = ({ logoImg, socials }: any) => {
           <Link
             key={path}
             href={path}
-            className="text-[#696c6d] hover:text-primary transition"
+            className="text-whiter hover:text-primary transition"
           >
             {name}
           </Link>
