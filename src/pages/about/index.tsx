@@ -11,15 +11,15 @@ import { BLOCKS } from '@contentful/rich-text-types';
 
 const About = ({ aboutPageContent }: any) => {
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
-  const title = aboutPageContent.fields?.title || 'Name has been changed :C';
+  const title = aboutPageContent?.fields?.title || 'Name has been changed :C';
 
-  const subtitle = documentToHtmlString(aboutPageContent.fields?.description, {
+  const subtitle = documentToHtmlString(aboutPageContent?.fields?.description, {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, next) => next(node.content),
     },
   });
 
-  const personImg = aboutPageContent.fields?.image.fields.file.url || '';
+  const personImg = aboutPageContent?.fields?.image?.fields?.file?.url || '';
 
   // const buttonText = documentToHtmlString(homePage.fields?.homeButton, {
   //   renderNode: {
@@ -92,8 +92,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      aboutPageContent,
-      headerContent,
+      aboutPageContent: aboutPageContent ?? null,
+      headerContent: headerContent ?? null,
     },
     revalidate: 10,
   };

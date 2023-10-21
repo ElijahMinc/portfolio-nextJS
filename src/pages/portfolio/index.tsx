@@ -17,18 +17,21 @@ const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
 
   const buttonText = portfolioPageContent.fields?.buttonText;
 
-  const title =
-    portfolioPageContent.fields?.title || 'Name has been changed :C';
+  const title = portfolioPageContent.fields?.title || 'No Title :C';
 
-  const subtitle = documentToHtmlString(portfolioPageContent.fields?.subtitle, {
-    renderNode: {
-      [BLOCKS.PARAGRAPH]: (node, next) => next(node.content),
-    },
-  });
+  const subtitle = !!portfolioPageContent.fields?.subtitle
+    ? documentToHtmlString(portfolioPageContent.fields?.subtitle, {
+        renderNode: {
+          [BLOCKS.PARAGRAPH]: (node, next) => next(node.content),
+        },
+      })
+    : 'No Subtitle :C';
 
-  const images = portfolioPageContent.fields.images?.map(
-    (image: any) => image.fields.file.url,
-  );
+  const images = portfolioPageContent.fields?.images
+    ? portfolioPageContent.fields?.images?.map(
+        (image: any) => image.fields.file.url,
+      )
+    : [];
 
   const videos = videosContent.items as any[];
 
@@ -139,9 +142,9 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      headerContent,
-      portfolioPageContent,
-      videosContent,
+      headerContent: headerContent ?? null,
+      portfolioPageContent: portfolioPage ?? null,
+      videosContent: videosContent ?? null,
     },
     revalidate: 3600,
   };

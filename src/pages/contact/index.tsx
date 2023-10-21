@@ -94,8 +94,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      headerContent,
-      contactPageContent,
+      headerContent: headerContent ?? null,
+      contactPageContent: contactPageContent ?? null,
     },
     revalidate: 10,
   };

@@ -9,17 +9,17 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 const Home = ({ homePage }: { homePage: any }) => {
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
-  const title = homePage.fields?.title || 'Name has been changed :C';
+  const title = homePage?.fields?.title || 'Name has been changed :C';
 
-  const subtitle = documentToHtmlString(homePage.fields?.description, {
+  const subtitle = documentToHtmlString(homePage?.fields?.description, {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, next) => next(node.content),
     },
   });
 
-  const personImg = homePage.fields?.person?.fields.file.url || '';
+  const personImg = homePage?.fields?.person?.fields?.file?.url || '';
 
-  const buttonText = documentToHtmlString(homePage.fields?.homeButton, {
+  const buttonText = documentToHtmlString(homePage?.fields?.homeButton, {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, next) => next(node.content),
     },
@@ -31,7 +31,7 @@ const Home = ({ homePage }: { homePage: any }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={transition1}
-      className="section overflow-y-scroll overflow-x-hidden bg-slate-200"
+      className="section overflow-y-scroll overflow-x-hidden"
     >
       <div className="container mx-auto h-full relative">
         <div className="flex flex-col justify-center">
@@ -42,18 +42,20 @@ const Home = ({ homePage }: { homePage: any }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: '-50%' }}
             transition={transition1}
-            className="w-full lg:max-w-[650px] pt-36 pb-14 lg:pt-0 lg:pb-0 lg:w-auto z-10 lg:absolute flex flex-col justify-center items-center lg:items-center lg:basis-1/2"
+            className="w-full lg:max-w-[70%] lg:w-[70%] pt-36 pb-14 lg:pt-0 lg:pb-0 z-10 lg:absolute flex flex-col justify-center items-center lg:items-center lg:basis-1/2"
           >
             <h1 className="h1 text-center">{title}</h1>
             <p className="text-[26px] lg:text-[36px] font-primary mb-4 lg:mb-12">
               {subtitle}
             </p>
-            <Link
-              href="/contact"
-              className="btn block mb-[30px] hover:rounded-tr-lg hover:rounded-bl-lg hover:tracking-widest"
-            >
-              {buttonText}
-            </Link>
+            {buttonText && (
+              <Link
+                href="/contact"
+                className="btn block mb-[30px] hover:rounded-tr-lg hover:rounded-bl-lg hover:tracking-widest"
+              >
+                {buttonText}
+              </Link>
+            )}
           </motion.div>
           <div className="flex justify-end max-h-full ">
             <motion.div
@@ -66,6 +68,7 @@ const Home = ({ homePage }: { homePage: any }) => {
               className="relative lg:-right-40 overflow-hidden"
             >
               <motion.img
+                className="w-[800px]"
                 whileHover={{ scale: 1.1 }}
                 transition={transition1}
                 src={personImg}
@@ -96,8 +99,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      homePage: homePageContent,
-      headerContent,
+      homePage: homePageContent ?? null,
+      headerContent: headerContent ?? null,
     },
     revalidate: 10,
   };
