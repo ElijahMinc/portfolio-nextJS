@@ -15,10 +15,13 @@
     "incremental": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@shared/*": ["./src/shared/*"],
-      "@widgets/*": ["./src/widgets/*"],
-      "@features/*": ["./src/features/*"],
-      "@entities/*": ["./src/entities/*"]
+      "@/context/*": ["./src/context/*"],
+      "@/layout/*": ["./src/layout/*"],
+      "@/components/*": ["./src/components/*"]
+      // "@shared/*": ["./src/shared/*"],
+      // "@widgets/*": ["./src/widgets/*"],
+      // "@features/*": ["./src/features/*"],
+      // "@entities/*": ["./src/entities/*"]
     }
   },
   "include": [

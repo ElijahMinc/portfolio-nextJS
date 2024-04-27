@@ -7,6 +7,7 @@ import client from '../../contentful/index';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { useRef } from 'react';
+import { withLayout } from '@/layout';
 
 const Home = ({ homePage }: { homePage: any }) => {
   const titleRef = useRef(null);
@@ -108,4 +109,4 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export default Home;
+export default withLayout(Home);
