@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { transition1 } from '@/shared/constants/transitions';
-import { useCursor } from '@/shared/hooks';
+import { useCursor, useTextAnimation } from '@/shared/hooks';
 import { GetStaticProps } from 'next';
 import client from '../../../contentful/index';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
@@ -11,6 +11,8 @@ import { BLOCKS } from '@contentful/rich-text-types';
 
 const About = ({ aboutPageContent }: any) => {
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
+  const titleRef = useRef(null);
+
   const title = aboutPageContent?.fields?.title || 'Name has been changed :C';
 
   const subtitle = documentToHtmlString(aboutPageContent?.fields?.description, {
@@ -20,6 +22,8 @@ const About = ({ aboutPageContent }: any) => {
   });
 
   const personImg = aboutPageContent?.fields?.image?.fields?.file?.url || '';
+
+  useTextAnimation(titleRef.current, title);
 
   // const buttonText = documentToHtmlString(homePage.fields?.homeButton, {
   //   renderNode: {
@@ -50,16 +54,14 @@ const About = ({ aboutPageContent }: any) => {
             <img src={personImg} alt="" />
           </motion.div>
           {/* text */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={transition1}
+          <div
             onMouseEnter={mouseEnterHandle}
             onMouseLeave={mouseLeaveHandle}
             className="flex-1 pt-36 pb-14 lg:pt-0 lg:w-auto z-10 flex flex-col justify-center items-center lg:items-start"
           >
-            <h1 className="h1">{title}</h1>
+            <h1 className="h1" ref={titleRef}>
+              {title}
+            </h1>
             <p className="mb-12 max-w-sm">{subtitle}</p>
 
             <Link
@@ -68,7 +70,7 @@ const About = ({ aboutPageContent }: any) => {
             >
               View my work
             </Link>
-          </motion.div>
+          </div>
         </div>
       </div>
     </motion.section>

@@ -1,6 +1,7 @@
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { transition1 } from '@/shared/constants/transitions';
-import { useCursor } from '@/shared/hooks';
+import { useCursor, useTextAnimation } from '@/shared/hooks';
 import { GetStaticProps } from 'next';
 import client from '../../../contentful/index';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
@@ -9,6 +10,7 @@ import { SendContactForm } from '@/features';
 
 const Contact = ({ contactPageContent }: any) => {
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
+  const titleRef = useRef(null);
 
   const title = contactPageContent.fields?.title || 'Name has been changed :C';
 
@@ -20,6 +22,8 @@ const Contact = ({ contactPageContent }: any) => {
 
   const personImg = contactPageContent.fields?.image.fields.file.url || '';
 
+  useTextAnimation(titleRef.current, title);
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -30,19 +34,18 @@ const Contact = ({ contactPageContent }: any) => {
     >
       <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row h-full items-center justify-start gap-x-8 text-center lg:text-left overflow-x-hidden">
-          <div className="hidden lg:flex bg-[#eef7f9] absolute bottom-0 left-0 right-0 top-72 pointer-events-none" />
+          <div className="hidden lg:flex bg-[#eef7f9] absolute bottom-0 left-0 right-0 top-72 pointer-events-none " />
 
           {/* text & form */}
-          <motion.div
-            initial={{ opacity: 0, x: '-50%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '-50%' }}
+          <div
             onMouseEnter={mouseEnterHandle}
             onMouseLeave={mouseLeaveHandle}
-            transition={transition1}
-            className="lg:flex-1 lg:pt-32 px-4"
+            // transition={transition1}
+            className="lg:flex-1 lg:pt-32 px-4 z-20"
           >
-            <h1 className="h1">{title}</h1>
+            <h1 className="h1" ref={titleRef}>
+              {title}
+            </h1>
 
             <p className="mb-12">{subtitle}</p>
 
@@ -60,7 +63,7 @@ const Contact = ({ contactPageContent }: any) => {
                 />
               </div>
             </form> */}
-          </motion.div>
+          </div>
 
           <motion.div
             initial={{ opacity: 0 }}

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, Children } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { CgMenuRight } from 'react-icons/cg';
 import { motion } from 'framer-motion';
 import { menuAnimationVariant } from '../constants/menuAnimationVartiants';
+import { useRouter } from 'next/router';
 
 export const HeaderMobile = ({ children }) => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -29,7 +30,11 @@ export const HeaderMobile = ({ children }) => {
           <IoMdClose />
         </div>
 
-        {children}
+        {Children.map(children, (child, index) => (
+          <span onClick={() => setOpenMenu(false)}>
+            {React.cloneElement(child)}
+          </span>
+        ))}
       </motion.div>
     </nav>
   );

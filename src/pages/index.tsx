@@ -1,13 +1,15 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useCursor } from '@/shared/hooks';
+import { useCursor, useTextAnimation } from '@/shared/hooks';
 import { transition1 } from '@/shared/constants/transitions';
 import { GetStaticProps } from 'next';
 import client from '../../contentful/index';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { useRef } from 'react';
 
 const Home = ({ homePage }: { homePage: any }) => {
+  const titleRef = useRef(null);
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
   const title = homePage?.fields?.title || 'Name has been changed :C';
 
@@ -25,6 +27,8 @@ const Home = ({ homePage }: { homePage: any }) => {
     },
   });
 
+  useTextAnimation(titleRef.current, title);
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -35,16 +39,14 @@ const Home = ({ homePage }: { homePage: any }) => {
     >
       <div className="container mx-auto h-full relative">
         <div className="flex flex-col justify-center">
-          <motion.div
+          <div
             onMouseEnter={mouseEnterHandle}
             onMouseLeave={mouseLeaveHandle}
-            initial={{ opacity: 0, y: '-50%' }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: '-50%' }}
-            transition={transition1}
             className="w-full lg:max-w-[70%] lg:w-[70%] pt-36 pb-14 lg:pt-0 lg:pb-0 z-10 lg:absolute flex flex-col justify-center items-center lg:items-center lg:basis-1/2"
           >
-            <h1 className="h1 text-center">{title}</h1>
+            <h1 className="h1 text-center" ref={titleRef}>
+              {title}
+            </h1>
             <p className="text-[26px] lg:text-[36px] font-primary mb-4 lg:mb-12">
               {subtitle}
             </p>
@@ -56,7 +58,7 @@ const Home = ({ homePage }: { homePage: any }) => {
                 {buttonText}
               </Link>
             )}
-          </motion.div>
+          </div>
           <div className="flex justify-end max-h-full ">
             <motion.div
               onMouseEnter={mouseEnterHandle}
