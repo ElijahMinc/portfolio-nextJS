@@ -7,11 +7,7 @@ import React, { useState } from 'react';
 import ReactConfetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
 
-export interface SendContactFormProps {
-  handleSubmit?: (values: Record<string, unknown>) => void;
-}
-
-export const SendContactForm = ({ handleSubmit }: SendContactFormProps) => {
+export const SendContactForm = () => {
   const { width, height } = useWindowSize();
   const [isSendStatus, setSendStatus] = useState(false);
 
@@ -25,10 +21,7 @@ export const SendContactForm = ({ handleSubmit }: SendContactFormProps) => {
     }
 
     successNotification(`🦄 ${res.message}`);
-
     setSendStatus(true);
-
-    handleSubmit?.(values);
 
     setTimeout(() => {
       setSendStatus(false);
@@ -37,11 +30,7 @@ export const SendContactForm = ({ handleSubmit }: SendContactFormProps) => {
 
   return (
     <>
-      <ContactForm
-        buttonSubmitText="Send it"
-        handleSubmit={onSubmit}
-        isResetFormAfterSuccessfulRequest
-      />
+      <ContactForm buttonSubmitText="Send it" handleSubmit={onSubmit} />
       {isSendStatus && (
         <ReactConfetti
           width={width}
