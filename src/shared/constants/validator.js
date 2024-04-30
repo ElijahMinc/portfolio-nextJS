@@ -51,7 +51,7 @@ export const validator = {
 export const validate = ({ schema, name, value, values }) => {
   let message = '';
   let customValidationPassed = false;
-  console.log('schema', schema);
+
   const validation = schema[name].validation || [];
   const customValidation = schema[name].customValidation;
   const valuesToPresent = schema[name].valuesRequired;

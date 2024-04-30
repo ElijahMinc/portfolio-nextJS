@@ -35,14 +35,16 @@ const Home = ({ homePage }: { homePage: any }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={transition1}
-      className="section overflow-y-scroll overflow-x-hidden"
+      className="section lg:overflow-y-scroll lg:overflow-x-hidden"
     >
       <div className="container mx-auto h-full relative ">
-        <div className="flex flex-col justify-center pt-[80px]">
+        <div className="flex flex-col justify-center lg:pt-[80px]">
           <div
             onMouseEnter={mouseEnterHandle}
             onMouseLeave={mouseLeaveHandle}
-            className="w-full lg:max-w-[70%] lg:w-[70%] pt-36 pb-14 lg:pt-0 lg:pb-0 lg:absolute flex flex-col justify-center items-center lg:items-center lg:basis-1/2 relative z-20"
+            className="w-full lg:max-w-[70%] lg:w-[70%] pt-36 pb-14 lg:pt-0 lg:pb-0 lg:absolute flex flex-col justify-center items-center lg:items-center lg:basis-1/2 relative z-20
+            
+            "
           >
             {title && (
               <h1 className="h1 text-center" ref={titleRef}>
@@ -60,7 +62,7 @@ const Home = ({ homePage }: { homePage: any }) => {
             <div>
               {buttonText && (
                 <Link
-                  href={ROUTES.CONTACT}
+                  href={ROUTES.ABOUT}
                   className="btn flex justify-center items-center mb-[30px]"
                 >
                   {buttonText}
@@ -77,7 +79,7 @@ const Home = ({ homePage }: { homePage: any }) => {
               </a>
             )}
           </div>
-          <div className="flex justify-end max-h-full ">
+          <div className="flex justify-end lg:max-h-full lg:static lg:blur-none absolute top-0 left-0 w-full h-full blur-sm pointer-events-none lg:pointer-events-auto">
             <motion.div
               onMouseEnter={mouseEnterHandle}
               onMouseLeave={mouseLeaveHandle}
@@ -94,7 +96,7 @@ const Home = ({ homePage }: { homePage: any }) => {
                 src={personUrl}
                 alt="Me"
               />
-              <div className="absolute top-0 left-0 w-full h-full pointer-events-none bg-blue-100 z-0" />
+              <div className="absolute top-0 left-0 w-full h-full pointer-events-none lg:pointer-events-auto bg-blue-200 lg:bg-blue-100 z-0" />
             </motion.div>
           </div>
         </div>

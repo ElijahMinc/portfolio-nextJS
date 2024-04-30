@@ -7,8 +7,24 @@ import client from '../../../contentful/index';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { ROUTES } from '@/shared/constants/routes';
+import { useState } from 'react';
 
 const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
+  const title = portfolioPageContent.fields?.title || null;
+  const description = !!portfolioPageContent.fields?.subtitle
+    ? documentToHtmlString(portfolioPageContent.fields?.subtitle, {
+        renderNode: {
+          [BLOCKS.PARAGRAPH]: (node, next) => next(node.content),
+        },
+      })
+    : null;
+
+  const [currentWork, setCurrentWork] = useState({
+    title,
+    description,
+    link: '',
+  });
+
   const {
     mouseEnterHandle,
     mouseLeaveHandle,
@@ -16,21 +32,9 @@ const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
     setCursorDefault,
   } = useCursor();
 
-  const title = portfolioPageContent.fields?.title || null;
-  const subtitle = !!portfolioPageContent.fields?.subtitle
-    ? documentToHtmlString(portfolioPageContent.fields?.subtitle, {
-        renderNode: {
-          [BLOCKS.PARAGRAPH]: (node, next) => next(node.content),
-        },
-      })
-    : null;
   const buttonText = portfolioPageContent.fields?.buttonText;
 
-  const previewPortfolioWorks = portfolioPageContent.fields?.images
-    ? portfolioPageContent.fields?.images?.map(
-        (image: any) => image.fields.file.url,
-      )
-    : [];
+  const previewPortfolioWorks = portfolioPageContent.fields?.images || [];
 
   const videos = videosContent.items as any[];
 
@@ -45,23 +49,32 @@ const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
       <div className="container mx-auto relative pr-1 pl-1">
         <div className="flex flex-col lg:flex-row h-full items-center justify-center gap-x-24 text-center lg:text-left pt-24 lg:pt-36 pb-8">
           <motion.div
+            key={currentWork?.title}
             initial={{ opacity: 0, x: '-50%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '-50%' }}
             transition={transition1}
             onMouseEnter={mouseEnterHandle}
             onMouseLeave={mouseLeaveHandle}
-            className="flex flex-col lg:items-start"
+            className="flex flex-col lg:items-start  lg:flex-[0_0_40%]  lg:w-[40%]"
           >
-            {title && <h1 className="h1">{title}</h1>}
-            {subtitle && <p className="mb-12 max-w-sm">{subtitle}</p>}
-            {buttonText && (
-              <Link
+            {currentWork?.title && <h1 className="h1">{currentWork.title}</h1>}
+            {currentWork?.description && (
+              <div
+                className="mb-12 max-w-sm"
+                dangerouslySetInnerHTML={{
+                  __html: currentWork.description,
+                }}
+              />
+            )}
+            {!!currentWork.link && (
+              <a
                 className="btn mb-[30px] mr-auto lg:mr-0 w-full lg:w-auto"
-                href={ROUTES.CONTACT}
+                href={currentWork.link}
+                target="_blank"
               >
-                {buttonText}
-              </Link>
+                Go to Prod
+              </a>
             )}
           </motion.div>
           {/* Image grid */}
@@ -74,17 +87,39 @@ const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
               transition={transition1}
               onMouseEnter={mouseEnterHandle}
               onMouseLeave={setCursorDefault}
-              className="grid grid-cols-2 lg:gap-2"
+              className="grid lg:grid-cols-2 gap-2 lg:flex-[0_0_60%]"
             >
-              {previewPortfolioWorks.map((portfolioWork: string) => (
+              {previewPortfolioWorks.map((portfolioWork: any) => (
                 <div
-                  key={portfolioWork}
-                  className="max-w-[250px] lg:max-w-[320px] h-[187px] lg:h-[220px] bg-accent overflow-hidden"
+                  key={portfolioWork.fields.file.url}
+                  className="max-w-full lg:max-w-full h-[187px] lg:h-[220px] bg-accent overflow-hidden"
+                  onClick={() => {
+                    const work =
+                      portfolioPageContent.fields.workLinks[
+                        portfolioWork.fields.title
+                      ];
+
+                    setCurrentWork({
+                      title: work.title,
+                      description: work.description,
+                      link: work.link,
+                    });
+                  }}
                 >
                   <img
-                    className="object-cover h-full lg:h-[220px] hover:scale-110 transition-all duration-500"
-                    src={portfolioWork}
-                    alt="Portfolio Work"
+                    className={`object-cover w-full h-full lg:h-[220px] hover:scale-95 transition-all duration-500 cursor-pointer
+                    ${
+                      portfolioWork.fields.title.toLowerCase() ===
+                      currentWork.title.toLowerCase()
+                        ? 'scale-75'
+                        : ''
+                    }
+                    `}
+                    src={portfolioWork.fields.file.url}
+                    alt={
+                      portfolioWork.fields.title +
+                      portfolioWork.fields.description
+                    }
                   />
                 </div>
               ))}

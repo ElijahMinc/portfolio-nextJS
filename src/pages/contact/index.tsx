@@ -30,7 +30,7 @@ const Contact = ({ contactPageContent }: any) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={transition1}
-      className="section bg-white overflow-y-scroll pt-[50px] pb-[100px]"
+      className="section bg-white overflow-y-scroll pt-[100px] pb-[100px]"
     >
       <div className="container mx-auto">
         <div
@@ -46,7 +46,7 @@ const Contact = ({ contactPageContent }: any) => {
             onMouseLeave={mouseLeaveHandle}
             className={`lg:flex-${
               personImg ? '[1_1_0]' : '[0_1_50%]'
-            }   lg:pt-32 px-4 z-20`}
+            }   lg:pt-32 px-1 lg:px-4 z-20`}
           >
             <h1 className="h1" ref={titleRef}>
               {title}

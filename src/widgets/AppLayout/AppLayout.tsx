@@ -32,7 +32,7 @@ export const AppLayout = ({
         animate={cursorBg}
         className={`${
           cursorBg === 'none' ? 'hidden' : ''
-        } w-[32px] h-[32px] bg-primary fixed top-0 left-0 pointer-events-none z-50 rounded-full`}
+        } w-[32px] h-[32px] bg-primary fixed top-[-100%] left-[-100%] pointer-events-none z-50 rounded-full`}
       />
     </div>
   );
