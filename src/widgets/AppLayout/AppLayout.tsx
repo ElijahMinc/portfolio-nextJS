@@ -17,9 +17,6 @@ export const AppLayout = ({
   const router = useRouter();
   const { cursorVariants, cursorBg } = useCursor();
 
-  console.log('cursorVariants X', cursorVariants?.default.x);
-  console.log('cursorVariants Y', cursorVariants?.default.y);
-
   return (
     <div className={mergeClassNames([MulishFont.className])}>
       {Header}

@@ -44,7 +44,7 @@ const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
       transition={transition1}
       className="section overflow-y-scroll lg:pt-[80px]"
     >
-      <div className="bg-black absolute top-0 left-0 w-full h-full pointer-events-none opacity-50 block lg:hidden z-10" />
+      <div className="bg-black absolute top-0 left-0 w-full h-full pointer-events-none opacity-90 block lg:hidden z-10" />
 
       <div className="container mx-auto relative pr-1 pl-1">
         <div className="flex flex-col lg:flex-row h-full items-center justify-center gap-x-24 text-center lg:text-left pt-24 lg:pt-36 pb-8">

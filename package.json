@@ -21,6 +21,7 @@
     "mongoose": "^8.3.2",
     "next": "13.5.4",
     "nodemailer": "^6.9.5",
+    "nprogress": "^0.2.0",
     "react": "^18",
     "react-confetti": "^6.1.0",
     "react-dom": "^18",
@@ -31,6 +32,7 @@
   "devDependencies": {
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.11",
+    "@types/nprogress": "^0.2.3",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.16",

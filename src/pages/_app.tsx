@@ -1,9 +1,18 @@
 import { CursorProvider } from '@/shared/lib/context/CursorContext';
 import { AppLayout, Header } from '@/widgets';
 import type { AppProps } from 'next/app';
+import Router from 'next/router';
+import NProgress from 'nprogress'; //nprogress module
 
+import 'nprogress/nprogress.css'; //styles of nprogress
 import '../shared/styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
+import { ProgressLayout } from '@/widgets/ProgressLayout';
+
+//Route Events.
+Router.events.on('routeChangeStart', () => NProgress.start());
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
 
 export default function App({
   Component,
@@ -13,10 +22,12 @@ export default function App({
   const socials = pageProps?.headerContent?.fields?.socials || [];
 
   return (
-    <CursorProvider>
-      <AppLayout Header={<Header logoUrl={logoUrl} socials={socials} />}>
-        <Component {...pageProps} />
-      </AppLayout>
-    </CursorProvider>
+    <ProgressLayout>
+      <CursorProvider>
+        <AppLayout Header={<Header logoUrl={logoUrl} socials={socials} />}>
+          <Component {...pageProps} />
+        </AppLayout>
+      </CursorProvider>
+    </ProgressLayout>
   );
 }

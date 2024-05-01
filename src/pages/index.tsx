@@ -35,26 +35,28 @@ const Home = ({ homePage }: { homePage: any }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={transition1}
-      className="section lg:overflow-y-scroll lg:overflow-x-hidden"
+      className="section lg:overflow-y-scroll lg:overflow-x-hidden "
     >
+      <div className="lg:block absolute top-0 left-0 w-screen h-screen pointer-events-none lg:pointer-events-auto bg-black opacity-90 lg:bg-blue-100 z-0" />
+
       <div className="container mx-auto h-full relative ">
-        <div className="flex flex-col justify-center lg:pt-[80px]">
+        <div className="flex flex-col justify-center lg:pt-[80px] pt-[100px]">
           <div
             onMouseEnter={mouseEnterHandle}
             onMouseLeave={mouseLeaveHandle}
-            className="w-full lg:max-w-[70%] lg:w-[70%] pt-36 pb-14 lg:pt-0 lg:pb-0 lg:absolute flex flex-col justify-center items-center lg:items-center lg:basis-1/2 relative z-20
+            className="w-full lg:max-w-[70%] lg:w-[70%] pt-36 pb-14 lg:pt-0 lg:pb-0 lg:absolute flex flex-col justify-center items-center lg:items-center lg:basis-1/2 relative z-20 
             
             "
           >
             {title && (
-              <h1 className="h1 text-center " ref={titleRef}>
+              <h1 className="h1 text-center max-w-72 lg:max-w-none" ref={titleRef}>
                 {title}
               </h1>
             )}
 
             {subtitle && (
               <div
-                className="text-[26px] lg:text-[36px] font-primary mb-4 lg:mb-12 flex flex-col gap-2 text-white lg:text-black"
+                className="text-[26px] lg:text-[36px] font-primary mb-10 lg:mb-12 flex flex-col gap-2 text-white lg:text-black"
                 dangerouslySetInnerHTML={{ __html: subtitle }}
               />
             )}
@@ -79,7 +81,7 @@ const Home = ({ homePage }: { homePage: any }) => {
               </a>
             )}
           </div>
-          <div className="flex justify-end lg:max-h-full lg:static lg:blur-none absolute top-0 left-0 w-full h-full blur-sm pointer-events-none lg:pointer-events-auto">
+          <div className="flex justify-end lg:max-h-full lg:static lg:blur-none absolute top-0 left-0 w-full h-full blur-[1px] pointer-events-none lg:pointer-events-auto">
             <motion.div
               onMouseEnter={mouseEnterHandle}
               onMouseLeave={mouseLeaveHandle}
@@ -90,13 +92,13 @@ const Home = ({ homePage }: { homePage: any }) => {
               className="relative lg:-right-40 overflow-hidden w-[700px] h-[700px] "
             >
               <motion.img
-                className=" absolute top-0 left-0 w-full h-full z-10 object-cover "
+                className=" absolute lg:top-0 lg:left-0 top-[-30px] left-[50px] w-full h-full z-10 object-cover "
                 whileHover={{ scale: 1.1 }}
                 transition={transition1}
                 src={personUrl}
                 alt="Me"
               />
-              <div className="absolute top-0 left-0 w-full h-full pointer-events-none lg:pointer-events-auto bg-black opacity-80 lg:bg-blue-100 z-0" />
+              {/* <div className=" lg:block absolute top-0 left-0 w-screen h-screen pointer-events-none lg:pointer-events-auto bg-black opacity-90 lg:bg-blue-100 z-0" /> */}
             </motion.div>
           </div>
         </div>
