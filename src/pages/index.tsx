@@ -13,7 +13,7 @@ import { ROUTES } from '@/shared/constants/routes';
 const Home = ({ homePage }: { homePage: any }) => {
   const titleRef = useRef(null);
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
-  const title = homePage?.fields?.title || 'Name has been changed :C';
+  const title = homePage?.fields?.title;
 
   const subtitle = documentToHtmlString(homePage?.fields?.description);
 
@@ -47,14 +47,14 @@ const Home = ({ homePage }: { homePage: any }) => {
             "
           >
             {title && (
-              <h1 className="h1 text-center" ref={titleRef}>
+              <h1 className="h1 text-center " ref={titleRef}>
                 {title}
               </h1>
             )}
 
             {subtitle && (
               <div
-                className="text-[26px] lg:text-[36px] font-primary mb-4 lg:mb-12 flex flex-col gap-2"
+                className="text-[26px] lg:text-[36px] font-primary mb-4 lg:mb-12 flex flex-col gap-2 text-white lg:text-black"
                 dangerouslySetInnerHTML={{ __html: subtitle }}
               />
             )}
@@ -62,7 +62,7 @@ const Home = ({ homePage }: { homePage: any }) => {
             <div>
               {buttonText && (
                 <Link
-                  href={ROUTES.ABOUT}
+                  href={ROUTES.CONTACT}
                   className="btn flex justify-center items-center mb-[30px]"
                 >
                   {buttonText}
@@ -96,7 +96,7 @@ const Home = ({ homePage }: { homePage: any }) => {
                 src={personUrl}
                 alt="Me"
               />
-              <div className="absolute top-0 left-0 w-full h-full pointer-events-none lg:pointer-events-auto bg-blue-200 lg:bg-blue-100 z-0" />
+              <div className="absolute top-0 left-0 w-full h-full pointer-events-none lg:pointer-events-auto bg-black opacity-80 lg:bg-blue-100 z-0" />
             </motion.div>
           </div>
         </div>

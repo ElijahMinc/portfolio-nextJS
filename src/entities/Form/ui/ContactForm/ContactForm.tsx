@@ -51,10 +51,14 @@ export const ContactForm = ({
             value={values.name}
             type="text"
             placeholder="Your name"
+            autoComplete="off"
             isError={!!errors?.['name']}
+            className="text-white border-b-white placeholder-white lg:placeholder-black lg:text-black lg:border-b-black"
           />
           {errors?.['name'] && (
-            <p className="text-red-500 text-xs mt-2">{errors?.['name']}</p>
+            <p className="text-red-500 text-xs mt-2 text-left">
+              {errors?.['name']}
+            </p>
           )}
         </div>
         <div>
@@ -64,11 +68,15 @@ export const ContactForm = ({
             onBlur={handleBlur}
             value={values.email}
             type="text"
+            autoComplete="off"
             placeholder="Your email address"
             isError={!!errors?.['email']}
+            className="placeholder-white text-white border-b-white lg:placeholder-black lg:text-black lg:border-b-black"
           />
           {errors?.['email'] && (
-            <p className="text-red-500 text-xs mt-2">{errors?.['email']}</p>
+            <p className="text-red-500 text-xs mt-2 text-left">
+              {errors?.['email']}
+            </p>
           )}
         </div>
       </div>
@@ -78,12 +86,16 @@ export const ContactForm = ({
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.message}
+          autoComplete="off"
           type="text"
           placeholder="Your message"
           isError={!!errors?.['message']}
+          className="placeholder-white text-white border-b-white lg:placeholder-black lg:text-black lg:border-b-black"
         />
         {errors?.['message'] && (
-          <p className="text-red-500 text-xs mt-2">{errors?.['message']}</p>
+          <p className="text-red-500 text-xs mt-2 text-left">
+            {errors?.['message']}
+          </p>
         )}
       </div>
       <Button

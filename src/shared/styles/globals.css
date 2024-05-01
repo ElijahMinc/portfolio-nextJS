@@ -10,7 +10,7 @@
 
 @layer components {
   .h1 {
-    @apply text-[48px] lg:text-[100px] font-primary font-bold leading-[120%] tracking-[-0.05em] mb-2;
+    @apply text-[60px] lg:text-[100px] font-primary font-bold leading-[120%] tracking-[-0.05em] mb-2 text-white lg:text-black;
   }
   .section {
     @apply h-screen w-screen;
@@ -192,4 +192,8 @@ iframe {
   width: 80px;
   height: 80px;
   transform: scale(1);
+}
+
+.contact-input::placeholder {
+  color: white;
 }

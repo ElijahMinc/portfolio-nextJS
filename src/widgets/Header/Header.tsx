@@ -28,25 +28,6 @@ export const Header = ({ logoUrl, socials }: any) => {
     </Link>
   ) : null;
 
-  const mobileNav = (
-    <HeaderMobile>
-      <ul className="h-full flex flex-col justify-center items-center gap-y-8 text-primary font-bold text-3xl font-primary">
-        {headerNavigationList.map(({ path, name }) => (
-          <li key={path}>
-            <Link
-              href={path}
-              style={
-                path === currentPathName ? { color: '#3ca8cb' } : undefined
-              }
-            >
-              {name}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </HeaderMobile>
-  );
-
   return (
     <HeaderWrapper
       logo={logo}
@@ -57,7 +38,12 @@ export const Header = ({ logoUrl, socials }: any) => {
           handleMouseLeave={mouseLeaveHandle}
         />
       }
-      mobile={mobileNav}
+      mobile={
+        <HeaderMobile
+          navigationData={headerNavigationList}
+          // socials={socials || []}
+        />
+      }
     >
       <nav
         className="hidden xl:flex gap-x-12 font-semibold"

@@ -17,7 +17,7 @@ export const useTextAnimation = (titleWrapperRef, titleContent) => {
 
       setTimeout(() => {
         span.classList.add('animate');
-      }, 100 * index);
+      }, 50 * index);
     }
   }, [titleWrapperRef]);
 };

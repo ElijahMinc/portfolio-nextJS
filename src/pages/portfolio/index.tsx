@@ -1,12 +1,10 @@
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import { transition1 } from '@/shared/constants/transitions';
 import { useCursor } from '@/shared/hooks';
 import { GetStaticProps } from 'next';
 import client from '../../../contentful/index';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
-import { ROUTES } from '@/shared/constants/routes';
 import { useState } from 'react';
 
 const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
@@ -44,8 +42,10 @@ const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={transition1}
-      className="section overflow-y-scroll lg:pt-[150px]"
+      className="section overflow-y-scroll lg:pt-[80px]"
     >
+      <div className="bg-black absolute top-0 left-0 w-full h-full pointer-events-none opacity-50 block lg:hidden z-10" />
+
       <div className="container mx-auto relative pr-1 pl-1">
         <div className="flex flex-col lg:flex-row h-full items-center justify-center gap-x-24 text-center lg:text-left pt-24 lg:pt-36 pb-8">
           <motion.div
@@ -56,12 +56,12 @@ const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
             transition={transition1}
             onMouseEnter={mouseEnterHandle}
             onMouseLeave={mouseLeaveHandle}
-            className="flex flex-col lg:items-start  lg:flex-[0_0_40%]  lg:w-[40%]"
+            className="flex flex-col lg:items-start  lg:flex-[0_0_40%]  lg:w-[40%] relative z-10"
           >
             {currentWork?.title && <h1 className="h1">{currentWork.title}</h1>}
             {currentWork?.description && (
               <div
-                className="mb-12 max-w-sm"
+                className="mb-12 max-w-sm text-white lg:text-black"
                 dangerouslySetInnerHTML={{
                   __html: currentWork.description,
                 }}
@@ -87,7 +87,7 @@ const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
               transition={transition1}
               onMouseEnter={mouseEnterHandle}
               onMouseLeave={setCursorDefault}
-              className="grid lg:grid-cols-2 gap-2 lg:flex-[0_0_60%]"
+              className="grid lg:grid-cols-2 gap-2 lg:flex-[0_0_60%] relative z-10"
             >
               {previewPortfolioWorks.map((portfolioWork: any) => (
                 <div

@@ -9,10 +9,13 @@ interface InputProps
   isError?: boolean;
 }
 
-export const Input = ({ isError = false, ...props }: InputProps) => (
+export const Input = ({ isError = false, className, ...props }: InputProps) => (
   <input
     className={cn(
-      `outline-none border-b ${!isError ? "border-b-primary" : '' } h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879] transition-all`,
+      className,
+      `outline-none border-b ${
+        !isError ? 'border-b-primary' : ''
+      } h-[60px] bg-transparent font-secondary w-full pl-3 transition-all`,
       {
         ['border-b-rose-300']: isError,
       },

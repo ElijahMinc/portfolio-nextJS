@@ -32,6 +32,8 @@ const Contact = ({ contactPageContent }: any) => {
       transition={transition1}
       className="section bg-white overflow-y-scroll pt-[100px] pb-[100px]"
     >
+      <div className="bg-black absolute top-0 left-0 w-full h-full pointer-events-none opacity-80 block lg:hidden z-10" />
+
       <div className="container mx-auto">
         <div
           className={`flex flex-col lg:flex-row h-full items-center  gap-x-8 text-center lg:text-left overflow-x-hidden ${
@@ -52,7 +54,7 @@ const Contact = ({ contactPageContent }: any) => {
               {title}
             </h1>
 
-            <p className="mb-12">{subtitle}</p>
+            <p className="mb-12 text-white lg:text-black">{subtitle}</p>
 
             <SendContactForm />
           </div>

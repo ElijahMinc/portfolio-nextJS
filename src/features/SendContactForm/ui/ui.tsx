@@ -2,7 +2,7 @@ import { ContactForm, postContactForm } from '@/entities';
 import {
   errorNotification,
   successNotification,
-} from '@/shared/lib/notificications/createNotification';
+} from '@/shared/lib/notification/createNotification';
 import React, { useState } from 'react';
 import ReactConfetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
