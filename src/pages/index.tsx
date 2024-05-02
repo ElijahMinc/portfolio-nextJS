@@ -93,7 +93,7 @@ const Home = ({ homePage }: { homePage: any }) => {
               animate={{ scale: 1 }}
               exit={{ scale: 0 }}
               transition={transition1}
-              className="relative lg:right-0 -right-40 w-[700px] h-[700px] z-30"
+              className="relative right-0 w-[700px] h-[700px] z-30"
             >
               <motion.img
                 className=" absolute lg:top-0 lg:left-0 top-[-30px] left-[50px] w-full h-full z-10 object-cover "
