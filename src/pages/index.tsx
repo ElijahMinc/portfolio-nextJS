@@ -77,7 +77,7 @@ const Home = ({ homePage }: { homePage: any }) => {
             </div>
             {CV && (
               <a
-                className="btn btn-primary flex justify-center items-center gap-1 bg-blue-200"
+                className="btn flex justify-center items-center gap-1 "
                 href={CV.url}
                 target="_blank"
               >

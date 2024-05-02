@@ -10,10 +10,11 @@
 
 @layer components {
   .h1 {
-    @apply text-[40px] lg:text-[50px] font-primary font-bold leading-[120%] tracking-[-0.05em] mb-2 text-white ;
+    @apply text-[40px] lg:text-[90px] font-primary font-bold leading-[120%] tracking-[-0.05em] mb-2 text-white;
   }
   .section {
     @apply h-screen w-screen;
+
   }
   .btn {
     @apply min-w-[220px] flex justify-center items-center lg:py-[18px] lg:px-[50px] lg:h-[66px] py-[12px] px-[40px] h-[46px] text-base rounded-md uppercase font-secondary font-semibold bg-primary text-white transition-all  hover:rounded-lg hover:tracking-widest;
@@ -32,6 +33,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
+  /* color: ; */
   background: #0e1112;
   border-radius: 25px;
 }

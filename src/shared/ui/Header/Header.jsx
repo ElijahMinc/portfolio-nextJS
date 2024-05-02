@@ -8,13 +8,7 @@ export const Header = ({ logo, children, rightHeaderContent, mobile }) => {
       <div className="w-full flex lg:flex-row justify-between items-center">
         <div className="max-w-[200px]">
           {/* Logo */}
-          {logo ? (
-            logo
-          ) : (
-            <h4 onMouseEnter={mouseEnterHandle} onMouseLeave={mouseLeaveHandle}>
-              Ilya P.
-            </h4>
-          )}
+          {logo}
         </div>
         {children}
 
