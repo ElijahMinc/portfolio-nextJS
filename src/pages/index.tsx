@@ -45,9 +45,7 @@ const Home = ({ homePage }: { homePage: any }) => {
           <div
             onMouseEnter={mouseEnterHandle}
             onMouseLeave={mouseLeaveHandle}
-            className="w-full lg:max-w-[70%] lg:w-[70%] pt-36 pb-14 lg:pt-0 lg:pb-0 lg:absolute flex flex-col justify-center items-center lg:items-center lg:basis-1/2 relative z-20 
-            
-            "
+            className="w-full lg:max-w-[70%] lg:w-[70%] pt-36 pb-14 lg:pt-0 lg:pb-0 lg:absolute flex flex-col justify-center items-center lg:items-center lg:basis-1/2 relative z-20"
           >
             {title && (
               <h1
@@ -85,25 +83,27 @@ const Home = ({ homePage }: { homePage: any }) => {
               </a>
             )}
           </div>
-          <div className="flex justify-end lg:max-h-full lg:static lg:blur-none absolute top-0 left-0 w-full h-full blur-[1px] pointer-events-none lg:pointer-events-auto overflow-hidden">
-            <motion.div
-              onMouseEnter={mouseEnterHandle}
-              onMouseLeave={mouseLeaveHandle}
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0 }}
-              transition={transition1}
-              className="relative right-0 w-[700px] h-[700px] z-30"
-            >
-              <motion.img
-                className=" absolute lg:top-0 lg:left-0 top-[-30px] left-[50px] w-full h-full z-10 object-cover "
-                whileHover={{ scale: 1.1 }}
+          {personUrl && (
+            <div className="flex justify-end lg:max-h-full lg:static lg:blur-none absolute top-0 left-0 w-full h-full blur-[1px] pointer-events-none lg:pointer-events-auto overflow-hidden">
+              <motion.div
+                onMouseEnter={mouseEnterHandle}
+                onMouseLeave={mouseLeaveHandle}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0 }}
                 transition={transition1}
-                src={personUrl}
-                alt="Me"
-              />
-            </motion.div>
-          </div>
+                className="relative right-0 w-[700px] h-[700px] z-30"
+              >
+                <motion.img
+                  className=" absolute lg:top-0 lg:left-0 top-[-30px] left-[50px] w-full h-full z-10 object-cover "
+                  whileHover={{ scale: 1.1 }}
+                  transition={transition1}
+                  src={personUrl}
+                  alt="Me"
+                />
+              </motion.div>
+            </div>
+          )}
         </div>
       </div>
     </motion.section>
