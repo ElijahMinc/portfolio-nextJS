@@ -85,7 +85,7 @@ const Home = ({ homePage }: { homePage: any }) => {
               </a>
             )}
           </div>
-          <div className="flex justify-end lg:max-h-full lg:static lg:blur-none absolute top-0 left-0 w-full h-full blur-[1px] pointer-events-none lg:pointer-events-auto">
+          <div className="flex justify-end lg:max-h-full lg:static lg:blur-none absolute top-0 left-0 w-full h-full blur-[1px] pointer-events-none lg:pointer-events-auto overflow-hidden lg:overflow-auto">
             <motion.div
               onMouseEnter={mouseEnterHandle}
               onMouseLeave={mouseLeaveHandle}
@@ -102,7 +102,6 @@ const Home = ({ homePage }: { homePage: any }) => {
                 src={personUrl}
                 alt="Me"
               />
-              {/* <div className=" lg:block absolute top-0 left-0 w-screen h-screen pointer-events-none lg:pointer-events-auto bg-black opacity-90 lg:bg-blue-100 z-0" /> */}
             </motion.div>
           </div>
         </div>
