@@ -4,6 +4,7 @@ import { Mulish } from 'next/font/google';
 import { mergeClassNames } from '@/shared/lib/classNames/mergeClassNames';
 import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
+import cn from 'classnames';
 
 const MulishFont = Mulish({
   subsets: ['latin'],
@@ -30,9 +31,14 @@ export const AppLayout = ({
       <motion.div
         variants={cursorVariants}
         animate={cursorBg}
-        className={`${
-          cursorBg === 'none' ? 'hidden' : ''
-        } w-[32px] h-[32px] bg-primary fixed top-[-100%] left-[-100%] lg:top-[0%] lg:left-[0%] pointer-events-none z-50 rounded-full`}
+        className={cn(
+          ` w-[32px] h-[32px] bg-primary fixed top-[-100%] left-[-100%] lg:top-[0%] lg:left-[0%] pointer-events-none z-50 rounded-full `,
+          {
+            ['none']: cursorBg,
+            ['hidden']: !cursorBg,
+            ['opacity-70']: cursorBg === 'default',
+          },
+        )}
       />
     </div>
   );

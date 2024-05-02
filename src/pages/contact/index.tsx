@@ -28,7 +28,7 @@ const Contact = ({ contactPageContent }: any) => {
   return (
     <motion.section
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      animate={{ opacity: 1 }}  
       exit={{ opacity: 0 }}
       transition={transition1}
       className="section bg-black overflow-y-scroll pt-[100px] pb-[100px]"

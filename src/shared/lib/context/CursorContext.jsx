@@ -37,7 +37,7 @@ export const CursorProvider = ({ children }) => {
       height: '50px',
       x: cursorPos.x - 25,
       y: cursorPos.y - 25,
-      backgroundColor: '#0e1112',
+      backgroundColor: '#fff',
       mixBlendMode: 'normal',
       transition: {
         ease: 'linear',

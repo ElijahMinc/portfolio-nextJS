@@ -17,7 +17,7 @@ const particlesOptions: Partial<RecursivePartial<IOptions>> = {
     events: {
       onHover: {
         enable: true,
-        mode: 'repulse',
+        mode: 'grab',
       },
     },
   },
@@ -29,7 +29,7 @@ const particlesOptions: Partial<RecursivePartial<IOptions>> = {
       color: '#ffffff',
       distance: 150,
       enable: true,
-      opacity: 0.5,
+      opacity: 0.4,
       width: 1,
     },
     move: {
@@ -39,7 +39,7 @@ const particlesOptions: Partial<RecursivePartial<IOptions>> = {
         default: 'bounce',
       },
       random: false,
-      speed: 2,
+      speed: 0.3,
       straight: false,
     },
     number: {
@@ -50,7 +50,7 @@ const particlesOptions: Partial<RecursivePartial<IOptions>> = {
       value: 80,
     },
     opacity: {
-      value: 0.5,
+      value: 0.4,
     },
     shape: {
       type: 'circle',
