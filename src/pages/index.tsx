@@ -85,7 +85,7 @@ const Home = ({ homePage }: { homePage: any }) => {
               </a>
             )}
           </div>
-          <div className="flex justify-end lg:max-h-full lg:static lg:blur-none absolute top-0 left-0 w-full h-full blur-[1px] pointer-events-none lg:pointer-events-auto overflow-hidden lg:overflow-auto">
+          <div className="flex justify-end lg:max-h-full lg:static lg:blur-none absolute top-0 left-0 w-full h-full blur-[1px] pointer-events-none lg:pointer-events-auto overflow-hidden">
             <motion.div
               onMouseEnter={mouseEnterHandle}
               onMouseLeave={mouseLeaveHandle}
@@ -93,7 +93,7 @@ const Home = ({ homePage }: { homePage: any }) => {
               animate={{ scale: 1 }}
               exit={{ scale: 0 }}
               transition={transition1}
-              className="relative lg:-right-40 w-[700px] h-[700px] z-30"
+              className="relative lg:right-0 -right-40 w-[700px] h-[700px] z-30"
             >
               <motion.img
                 className=" absolute lg:top-0 lg:left-0 top-[-30px] left-[50px] w-full h-full z-10 object-cover "
