@@ -9,6 +9,7 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { useRef } from 'react';
 import { ImFilePdf } from 'react-icons/im';
 import { ROUTES } from '@/shared/constants/routes';
+import { withParticles } from '@/shared/hoc/withParticles';
 
 const Home = ({ homePage }: { homePage: any }) => {
   const titleRef = useRef(null);
@@ -37,7 +38,7 @@ const Home = ({ homePage }: { homePage: any }) => {
       transition={transition1}
       className="section lg:overflow-y-scroll lg:overflow-x-hidden "
     >
-      <div className="lg:block absolute top-0 left-0 w-screen h-screen pointer-events-none lg:pointer-events-auto bg-black opacity-90 lg:bg-blue-100 z-0" />
+      <div className="lg:block absolute top-0 left-0 w-screen h-screen pointer-events-none lg:pointer-events-auto bg-black opacity-90 z-0" />
 
       <div className="container mx-auto h-full relative ">
         <div className="flex flex-col justify-center lg:pt-[80px] pt-[100px]">
@@ -49,14 +50,17 @@ const Home = ({ homePage }: { homePage: any }) => {
             "
           >
             {title && (
-              <h1 className="h1 text-center max-w-72 lg:max-w-none" ref={titleRef}>
+              <h1
+                className="h1 text-center max-w-72 lg:max-w-none"
+                ref={titleRef}
+              >
                 {title}
               </h1>
             )}
 
             {subtitle && (
               <div
-                className="text-[26px] lg:text-[36px] font-primary mb-10 lg:mb-12 flex flex-col gap-2 text-white lg:text-black"
+                className="text-[26px] lg:text-[36px] font-primary mb-10 lg:mb-12 flex flex-col gap-2 text-white "
                 dangerouslySetInnerHTML={{ __html: subtitle }}
               />
             )}
@@ -89,7 +93,7 @@ const Home = ({ homePage }: { homePage: any }) => {
               animate={{ scale: 1 }}
               exit={{ scale: 0 }}
               transition={transition1}
-              className="relative lg:-right-40 overflow-hidden w-[700px] h-[700px] "
+              className="relative lg:-right-40 w-[700px] h-[700px] z-30"
             >
               <motion.img
                 className=" absolute lg:top-0 lg:left-0 top-[-30px] left-[50px] w-full h-full z-10 object-cover "
@@ -130,4 +134,4 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export default Home;
+export default withParticles(Home);

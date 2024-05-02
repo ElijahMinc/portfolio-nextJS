@@ -7,6 +7,7 @@ import client from '../../../contentful/index';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { SendContactForm } from '@/features';
+import { withParticles } from '@/shared/hoc/withParticles';
 
 const Contact = ({ contactPageContent }: any) => {
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
@@ -30,7 +31,7 @@ const Contact = ({ contactPageContent }: any) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={transition1}
-      className="section bg-white overflow-y-scroll pt-[100px] pb-[100px]"
+      className="section bg-black overflow-y-scroll pt-[100px] pb-[100px]"
     >
       <div className="bg-black absolute top-0 left-0 w-full h-full pointer-events-none opacity-90 block lg:hidden z-10" />
 
@@ -40,7 +41,7 @@ const Contact = ({ contactPageContent }: any) => {
             personImg ? 'justify-start' : 'justify-center'
           }`}
         >
-          <div className="hidden lg:flex bg-[#eef7f9] absolute bottom-0 left-0 right-0 top-72 pointer-events-none " />
+          <div className="hidden lg:flex bg-[#eef7f959] absolute bottom-0 left-0 right-0 top-72 pointer-events-none " />
 
           {/* text & form */}
           <div
@@ -54,7 +55,7 @@ const Contact = ({ contactPageContent }: any) => {
               {title}
             </h1>
 
-            <p className="mb-12 text-white lg:text-black">{subtitle}</p>
+            <p className="mb-12 text-white">{subtitle}</p>
 
             <SendContactForm />
           </div>
@@ -78,7 +79,7 @@ const Contact = ({ contactPageContent }: any) => {
   );
 };
 
-export default Contact;
+export default withParticles(Contact);
 
 export const getStaticProps: GetStaticProps = async () => {
   const contactPage = await client.getEntries<any>({

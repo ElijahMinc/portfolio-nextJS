@@ -53,7 +53,7 @@ export const ContactForm = ({
             placeholder="Your name"
             autoComplete="off"
             isError={!!errors?.['name']}
-            className="text-white border-b-white placeholder-white lg:placeholder-black lg:text-black lg:border-b-black"
+            className="text-white border-b-white lg:placeholder-primary "
           />
           {errors?.['name'] && (
             <p className="text-red-500 text-xs mt-2 text-left">
@@ -71,7 +71,7 @@ export const ContactForm = ({
             autoComplete="off"
             placeholder="Your email address"
             isError={!!errors?.['email']}
-            className="placeholder-white text-white border-b-white lg:placeholder-black lg:text-black lg:border-b-black"
+            className="placeholder-white text-white border-b-white lg:placeholder-primary "
           />
           {errors?.['email'] && (
             <p className="text-red-500 text-xs mt-2 text-left">
@@ -90,7 +90,7 @@ export const ContactForm = ({
           type="text"
           placeholder="Your message"
           isError={!!errors?.['message']}
-          className="placeholder-white text-white border-b-white lg:placeholder-black lg:text-black lg:border-b-black"
+          className="placeholder-white text-white border-b-white lg:placeholder-primary "
         />
         {errors?.['message'] && (
           <p className="text-red-500 text-xs mt-2 text-left">

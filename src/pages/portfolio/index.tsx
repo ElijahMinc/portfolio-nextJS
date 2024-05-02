@@ -6,6 +6,7 @@ import client from '../../../contentful/index';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { useState } from 'react';
+import { withParticles } from '@/shared/hoc/withParticles';
 
 const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
   const title = portfolioPageContent.fields?.title || null;
@@ -42,7 +43,7 @@ const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={transition1}
-      className="section overflow-y-scroll lg:pt-[80px]"
+      className="section bg-black overflow-y-scroll lg:pt-[80px]"
     >
       <div className="bg-black absolute top-0 left-0 w-full h-full pointer-events-none opacity-90 block lg:hidden z-10" />
 
@@ -61,7 +62,7 @@ const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
             {currentWork?.title && <h1 className="h1">{currentWork.title}</h1>}
             {currentWork?.description && (
               <div
-                className="mb-12 max-w-sm text-white lg:text-black"
+                className="mb-12 max-w-sm text-white "
                 dangerouslySetInnerHTML={{
                   __html: currentWork.description,
                 }}
@@ -156,7 +157,7 @@ const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
   );
 };
 
-export default Portfolio;
+export default withParticles(Portfolio);
 
 export const getStaticProps: GetStaticProps = async () => {
   const portfolioPage = await client.getEntries<any>({

@@ -7,6 +7,7 @@ import { GetStaticProps } from 'next';
 import client from '../../../contentful/index';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { ROUTES } from '@/shared/constants/routes';
+import { withParticles } from '@/shared/hoc/withParticles';
 
 const About = ({ aboutPageContent }: any) => {
   const titleRef = useRef(null);
@@ -27,7 +28,7 @@ const About = ({ aboutPageContent }: any) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={transition1}
-      className="section overflow-y-scroll lg:pt-[150px] pt-0 "
+      className="section overflow-y-scroll lg:pt-[150px] pt-0 bg-black"
     >
       <div className="bg-black absolute top-0 left-0 w-full h-full pointer-events-none opacity-50 block lg:hidden z-10" />
       <div className="container mx-auto relative ">
@@ -58,7 +59,7 @@ const About = ({ aboutPageContent }: any) => {
 
             {subtitle && (
               <div
-                className="mb-12 max-w-sm flex flex-col gap-2 lg:text-black text-white"
+                className="mb-12 max-w-sm flex flex-col gap-2 text-white"
                 dangerouslySetInnerHTML={{ __html: subtitle }}
               />
             )}
@@ -76,7 +77,7 @@ const About = ({ aboutPageContent }: any) => {
   );
 };
 
-export default About;
+export default withParticles(About);
 
 export const getStaticProps: GetStaticProps = async () => {
   const aboutPage = await client.getEntries<any>({
