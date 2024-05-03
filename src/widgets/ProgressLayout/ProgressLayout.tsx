@@ -40,7 +40,7 @@ export const ProgressLayout = ({ children }: React.PropsWithChildren) => {
           initial={{ transform: 'scale(1)' }}
           animate={{ transform: 'scale(1)' }}
           exit={{ transform: 'scale(0)' }}
-          className="fixed w-screen h-screen top-0 left-0 z-50 flex justify-center items-center bg-black opacity-80"
+          className="fixed w-screen h-screen top-0 left-0 z-50 flex justify-center items-center dark:bg-black opacity-80"
         >
           <div className="loader" />
         </motion.div>

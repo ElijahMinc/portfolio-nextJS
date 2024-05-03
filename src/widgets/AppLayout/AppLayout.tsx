@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useCursor } from '@/shared/hooks';
+import { useCursor, useTheme } from '@/shared/hooks';
 import { Mulish } from 'next/font/google';
 import { mergeClassNames } from '@/shared/lib/classNames/mergeClassNames';
 import { useRouter } from 'next/router';
@@ -16,6 +16,7 @@ export const AppLayout = ({
   Header,
 }: React.PropsWithChildren & { Header?: React.ReactNode }) => {
   const router = useRouter();
+  const { theme } = useTheme();
   const { cursorVariants, cursorBg } = useCursor();
 
   return (
@@ -32,7 +33,7 @@ export const AppLayout = ({
         variants={cursorVariants}
         animate={cursorBg}
         className={cn(
-          ` w-[32px] h-[32px] bg-primary fixed top-[-100%] left-[-100%] lg:top-[0%] lg:left-[0%] pointer-events-none z-50 rounded-full `,
+          ` w-[32px] h-[32px] fixed top-[-100%] left-[-100%] lg:top-[0%] lg:left-[0%] pointer-events-none z-50 rounded-full `,
           {
             ['none']: cursorBg,
             ['hidden']: !cursorBg,

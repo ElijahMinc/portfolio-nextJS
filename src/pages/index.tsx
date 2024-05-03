@@ -38,8 +38,6 @@ const Home = ({ homePage }: { homePage: any }) => {
       transition={transition1}
       className="section lg:overflow-y-scroll lg:overflow-x-hidden "
     >
-      <div className="lg:block absolute top-0 left-0 w-screen h-screen pointer-events-none lg:pointer-events-auto bg-black opacity-90 z-0" />
-
       <div className="container mx-auto h-full relative ">
         <div className="flex flex-col justify-center lg:pt-[80px] pt-[100px]">
           <div
@@ -95,7 +93,7 @@ const Home = ({ homePage }: { homePage: any }) => {
                 className="relative right-0 w-[700px] h-[700px] z-30"
               >
                 <motion.img
-                  className=" absolute lg:top-0 lg:left-0 top-[-30px] left-[50px] w-full h-full z-10 object-cover "
+                  className=" absolute lg:top-0 lg:left-0 top-[-30px] left-[50px] w-[95%] h-[95%] z-10 object-cover "
                   whileHover={{ scale: 1.1 }}
                   transition={transition1}
                   src={personUrl}

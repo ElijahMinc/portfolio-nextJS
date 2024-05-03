@@ -8,6 +8,7 @@ import 'nprogress/nprogress.css'; //styles of nprogress
 import '../shared/styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { ProgressLayout } from '@/widgets/ProgressLayout';
+import { ThemeProvider } from '@/shared/lib/context/ThemeContext';
 
 //Route Events.
 Router.events.on('routeChangeStart', () => NProgress.start());
@@ -23,11 +24,13 @@ export default function App({
 
   return (
     <ProgressLayout>
-      <CursorProvider>
-        <AppLayout Header={<Header logoUrl={logoUrl} socials={socials} />}>
-          <Component {...pageProps} />
-        </AppLayout>
-      </CursorProvider>
+      <ThemeProvider>
+        <CursorProvider>
+          <AppLayout Header={<Header logoUrl={logoUrl} socials={socials} />}>
+            <Component {...pageProps} />
+          </AppLayout>
+        </CursorProvider>
+      </ThemeProvider>
     </ProgressLayout>
   );
 }

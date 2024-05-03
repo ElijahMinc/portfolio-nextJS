@@ -9,9 +9,10 @@ import {
   headerNavigationList,
 } from '@shared/constants/headerNavigationList';
 import { Socials } from '@shared/ui';
-import { useCursor } from '@/shared/hooks';
+import { useCursor, useTheme } from '@/shared/hooks';
 import { Logo } from '@/shared/ui/Logo';
 import { ROUTES } from '@/shared/constants/routes';
+import { ThemeSwitcher } from '@/features';
 
 export const Header = ({
   logoUrl,
@@ -21,6 +22,7 @@ export const Header = ({
   socials: HeaderNavigationListData[];
 }) => {
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
+  const { toggleTheme, theme } = useTheme();
 
   return (
     <HeaderWrapper
@@ -32,12 +34,15 @@ export const Header = ({
           onMouseLeave={mouseLeaveHandle}
         />
       }
-      rightHeaderContent={
-        <Socials
-          socials={socials || []}
-          handleMouseEnter={mouseEnterHandle}
-          handleMouseLeave={mouseLeaveHandle}
-        />
+      rightContent={
+        <>
+          <Socials
+            socials={socials || []}
+            handleMouseEnter={mouseEnterHandle}
+            handleMouseLeave={mouseLeaveHandle}
+          />
+          {/* <ThemeSwitcher /> */}
+        </>
       }
       mobile={
         <HeaderMobile

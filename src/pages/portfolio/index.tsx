@@ -43,10 +43,8 @@ const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={transition1}
-      className="section bg-black overflow-y-scroll lg:pt-[80px]"
+      className="section dark:bg-black overflow-y-scroll lg:pt-[80px]"
     >
-      <div className="bg-black absolute top-0 left-0 w-full h-full pointer-events-none opacity-90 block lg:hidden z-10" />
-
       <div className="container mx-auto relative pr-1 pl-1">
         <div className="flex flex-col lg:flex-row h-full items-center justify-center gap-x-24 text-center lg:text-left pt-24 lg:pt-36 pb-8">
           <motion.div
@@ -62,7 +60,7 @@ const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
             {currentWork?.title && <h1 className="h1">{currentWork.title}</h1>}
             {currentWork?.description && (
               <div
-                className="mb-12 max-w-sm text-white "
+                className="mb-12 max-w-sm dark:text-white text-black"
                 dangerouslySetInnerHTML={{
                   __html: currentWork.description,
                 }}

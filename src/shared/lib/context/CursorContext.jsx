@@ -1,3 +1,4 @@
+import { useTheme } from '@/shared/hooks';
 import React, { useState, useEffect, createContext } from 'react';
 
 export const CursorContext = createContext();
@@ -7,6 +8,7 @@ export const CursorProvider = ({ children }) => {
     x: 0,
     y: 0,
   });
+  const { theme } = useTheme();
   const [cursorBg, setCursorBg] = useState('default');
 
   useEffect(() => {
@@ -37,7 +39,7 @@ export const CursorProvider = ({ children }) => {
       height: '50px',
       x: cursorPos.x - 25,
       y: cursorPos.y - 25,
-      backgroundColor: '#fff',
+      backgroundColor: theme === 'dark' ? '#fff' : '#000',
       mixBlendMode: 'normal',
       transition: {
         ease: 'linear',

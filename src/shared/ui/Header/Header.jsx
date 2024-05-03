@@ -1,8 +1,4 @@
-import { useCursor } from '@/shared/hooks';
-
-export const Header = ({ logo, children, rightHeaderContent, mobile }) => {
-  const { mouseLeaveHandle, mouseEnterHandle } = useCursor();
-
+export const Header = ({ logo, children, rightContent, mobile }) => {
   return (
     <header className=" fixed w-full px-[30px] lg:px-[100px] z-30 h-[80px] lg:h-[100px] flex items-center lg:backdrop-blur-xl">
       <div className="w-full flex lg:flex-row justify-between items-center">
@@ -12,7 +8,7 @@ export const Header = ({ logo, children, rightHeaderContent, mobile }) => {
         </div>
         {children}
 
-        <div className="hidden xl:flex ml-24">{rightHeaderContent}</div>
+        <div className="hidden xl:flex ml-24">{rightContent}</div>
 
         {mobile}
       </div>
