@@ -5,6 +5,7 @@ import { mergeClassNames } from '@/shared/lib/classNames/mergeClassNames';
 import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
 import cn from 'classnames';
+import Head from 'next/head';
 
 const MulishFont = Mulish({
   subsets: ['latin'],
@@ -20,27 +21,32 @@ export const AppLayout = ({
   const { cursorVariants, cursorBg } = useCursor();
 
   return (
-    <div className={mergeClassNames([MulishFont.className])}>
-      {Header}
+    <>
+      <Head>
+        <title>Ilya Protsenko Portfolio</title>
+      </Head>
+      <div className={mergeClassNames([MulishFont.className])}>
+        {Header}
 
-      <AnimatePresence initial={true} mode="wait">
-        <main key={router.route}>{children}</main>
-      </AnimatePresence>
+        <AnimatePresence initial={true} mode="wait">
+          <main key={router.route}>{children}</main>
+        </AnimatePresence>
 
-      <ToastContainer />
+        <ToastContainer />
 
-      <motion.div
-        variants={cursorVariants}
-        animate={cursorBg}
-        className={cn(
-          ` w-[32px] h-[32px] fixed top-[-100%] left-[-100%] lg:top-[0%] lg:left-[0%] pointer-events-none z-50 rounded-full `,
-          {
-            ['none']: cursorBg,
-            ['hidden']: !cursorBg,
-            ['opacity-70']: cursorBg === 'default',
-          },
-        )}
-      />
-    </div>
+        <motion.div
+          variants={cursorVariants}
+          animate={cursorBg}
+          className={cn(
+            ` w-[32px] h-[32px] fixed top-[-100%] left-[-100%] lg:top-[0%] lg:left-[0%] pointer-events-none z-50 rounded-full `,
+            {
+              ['none']: cursorBg,
+              ['hidden']: !cursorBg,
+              ['opacity-70']: cursorBg === 'default',
+            },
+          )}
+        />
+      </div>
+    </>
   );
 };
