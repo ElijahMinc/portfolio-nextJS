@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useCursor, useTextAnimation } from '@/shared/hooks';
+import { useCursor, useTextAnimation, useTheme } from '@/shared/hooks';
 import { transition1 } from '@/shared/constants/transitions';
 import { GetStaticProps } from 'next';
 import client from '../../contentful/index';
@@ -12,6 +12,7 @@ import { ROUTES } from '@/shared/constants/routes';
 import { withParticles } from '@/shared/hoc/withParticles';
 
 const Home = ({ homePage }: { homePage: any }) => {
+  const { theme } = useTheme();
   const titleRef = useRef(null);
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
   const title = homePage?.fields?.title;
@@ -82,7 +83,11 @@ const Home = ({ homePage }: { homePage: any }) => {
             )}
           </div>
           {personUrl && (
-            <div className="flex justify-end lg:max-h-full lg:static lg:blur-none absolute top-0 left-0 w-full h-full blur-[1px] pointer-events-none lg:pointer-events-auto overflow-hidden">
+            <div
+              className={`justify-end lg:max-h-full lg:static lg:blur-none absolute top-0 left-0 w-full h-full blur-[1px] pointer-events-none lg:pointer-events-auto overflow-hidden lg:flex  ${
+                theme === 'light' ? 'hidden' : 'flex'
+              }`}
+            >
               <motion.div
                 onMouseEnter={mouseEnterHandle}
                 onMouseLeave={mouseLeaveHandle}

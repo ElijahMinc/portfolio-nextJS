@@ -28,7 +28,7 @@ export const HeaderMobile = ({
         onClick={() => setOpenMenu(true)}
         className="text-3xl cursor-pointer"
       >
-        <CgMenuRight color="white" />
+        <CgMenuRight className="text-primary" />
       </div>
 
       <motion.div

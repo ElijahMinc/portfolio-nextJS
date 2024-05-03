@@ -53,7 +53,7 @@ const Contact = ({ contactPageContent }: any) => {
               {title}
             </h1>
 
-            <p className="mb-12 dark:text-white">{subtitle}</p>
+            <p className="mb-12 dark:text-white text-black">{subtitle}</p>
 
             <SendContactForm />
           </div>

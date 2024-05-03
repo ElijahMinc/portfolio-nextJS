@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { transition1 } from '@/shared/constants/transitions';
-import { useCursor, useTextAnimation } from '@/shared/hooks';
+import { useCursor, useTextAnimation, useTheme } from '@/shared/hooks';
 import { GetStaticProps } from 'next';
 import client from '../../../contentful/index';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
@@ -10,6 +10,7 @@ import { ROUTES } from '@/shared/constants/routes';
 import { withParticles } from '@/shared/hoc/withParticles';
 
 const About = ({ aboutPageContent }: any) => {
+  const { theme } = useTheme();
   const titleRef = useRef(null);
 
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
@@ -30,7 +31,8 @@ const About = ({ aboutPageContent }: any) => {
       transition={transition1}
       className="section overflow-y-scroll lg:pt-[150px] pt-0 "
     >
-      <div className="bg-black absolute top-0 left-0 w-full h-full pointer-events-none opacity-50 block lg:hidden z-10" />
+      <div className="dark:bg-black bg-white absolute top-0 left-0 w-full h-full pointer-events-none opacity-50 block lg:hidden z-10" />
+
       <div className="container mx-auto relative ">
         {/* text and img wrapepr */}
         <div className="flex flex-col lg:flex-row h-full items-center justify-center gap-x-24 text-center lg:text-left lg:pt-16 ">

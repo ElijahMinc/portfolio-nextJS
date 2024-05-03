@@ -14,6 +14,7 @@ export const ThemeSwitcher = ({ ...props }: ThemeSwitcherProps) => {
 
   return (
     <Theme
+      className="fixed left-[25px] top-[20px] lg:left-[100px] lg:top-[30px] z-50 hover:rotate-180 transition-all"
       onMouseEnter={mouseEnterHandle}
       onMouseLeave={mouseLeaveHandle}
       theme={theme}

@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
 import cn from 'classnames';
 import Head from 'next/head';
+import { ThemeSwitcher } from '@/features';
 
 const MulishFont = Mulish({
   subsets: ['latin'],
@@ -26,6 +27,8 @@ export const AppLayout = ({
         <title>Ilya Protsenko Portfolio</title>
       </Head>
       <div className={mergeClassNames([MulishFont.className])}>
+        <ThemeSwitcher />
+
         {Header}
 
         <AnimatePresence initial={true} mode="wait">
