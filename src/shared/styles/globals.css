@@ -13,7 +13,7 @@
     @apply text-[40px] lg:text-[90px] font-primary font-bold leading-[120%] tracking-[-0.05em] mb-2 text-black dark:text-white;
   }
   .section {
-    @apply h-screen w-screen dark:bg-black bg-blue-50;
+    @apply h-screen w-screen dark:bg-black bg-blue-50 px-1 ;
   }
   .btn {
     @apply min-w-[220px] flex justify-center items-center lg:py-[18px] lg:px-[50px] lg:h-[66px] py-[12px] px-[40px] h-[46px] text-base rounded-md uppercase font-secondary font-semibold bg-primary text-white transition-all  hover:rounded-lg hover:tracking-widest;

@@ -47,7 +47,7 @@ const Home = ({ homePage }: { homePage: any }) => {
           >
             {title && (
               <h1
-                className="h1 text-center max-w-72 lg:max-w-none"
+                className="h1 text-center max-w-72 lg:max-w-none mb-10 lg:mb-12 "
                 ref={titleRef}
               >
                 {title}

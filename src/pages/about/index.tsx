@@ -30,6 +30,7 @@ const About = ({ aboutPageContent }: any) => {
       transition={transition1}
       className="section overflow-y-scroll lg:pt-[150px] pt-0 "
     >
+      <div className="bg-black absolute top-0 left-0 w-full h-full pointer-events-none opacity-50 block lg:hidden z-10" />
       <div className="container mx-auto relative ">
         {/* text and img wrapepr */}
         <div className="flex flex-col lg:flex-row h-full items-center justify-center gap-x-24 text-center lg:text-left lg:pt-16 ">
