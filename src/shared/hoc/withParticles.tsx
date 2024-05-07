@@ -1,88 +1,45 @@
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import { useCallback } from 'react';
 import Particles from 'react-particles';
-//import { loadFull } from "tsparticles"; // if you are going to use `loadFull`, install the "tsparticles" package too.
-import { loadSlim } from 'tsparticles-slim'; // if you are going to use `loadSlim`, install the "tsparticles-slim" package too.
-import type {
-  Container,
-  Engine,
-  RecursivePartial,
-  IOptions,
-} from 'tsparticles-engine';
+import { loadSlim } from 'tsparticles-slim'; 
+import type { Engine, RecursivePartial, IOptions } from 'tsparticles-engine';
 import { useTheme } from '../hooks';
+import { THEMES } from '../constants/themes';
+import { defaultParticleOptions } from '../constants/defaultParticlesOptions';
 
 export const ParticlesLayout = ({
   children,
 }: React.PropsWithChildren): JSX.Element => {
+  const [options, setOptions] = useState<RecursivePartial<IOptions>>(
+    defaultParticleOptions,
+  );
+
   const { theme } = useTheme();
 
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadSlim(engine);
   }, []);
 
-  const particlesOptions: Partial<RecursivePartial<IOptions>> = useMemo(
-    () => ({
-      zIndex: -1,
-      fpsLimit: 120,
-      interactivity: {
-        events: {
-          onHover: {
-            enable: true,
-            mode: 'grab',
-          },
-        },
-      },
+  useEffect(() => {
+    setOptions((prevOptions) => ({
+      ...prevOptions,
       particles: {
+        ...prevOptions.particles,
         color: {
-          value: theme === 'dark' ? '#fff' : '#000',
+          value: theme === THEMES.DARK ? '#fff' : '#000',
         },
         links: {
-          color: theme === 'dark' ? '#fff' : '#000',
-          distance: 150,
-          enable: true,
-          opacity: 0.4,
-          width: 1,
-        },
-        move: {
-          direction: 'none',
-          enable: true,
-          outModes: {
-            default: 'bounce',
-          },
-          random: false,
-          speed: 0.3,
-          straight: false,
-        },
-        number: {
-          density: {
-            enable: true,
-            area: 800,
-          },
-          value: 80,
-        },
-        opacity: {
-          value: 0.4,
-        },
-        shape: {
-          type: 'circle',
-        },
-        size: {
-          value: { min: 1, max: 5 },
+          ...(prevOptions?.particles?.links || {}),
+          color: theme === THEMES.DARK ? '#fff' : '#000',
         },
       },
-      detectRetina: true,
-    }),
-    [theme],
-  );
+    }));
+  }, [theme]);
 
   return (
     <>
       {children}
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={particlesOptions}
-      />
+      <Particles id="tsparticles" init={particlesInit} options={options} />
     </>
   );
 };

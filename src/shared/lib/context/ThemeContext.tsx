@@ -1,3 +1,4 @@
+import { THEMES } from '@/shared/constants/themes';
 import React, {
   useState,
   useEffect,
@@ -7,10 +8,6 @@ import React, {
   useMemo,
 } from 'react';
 
-export enum THEMES {
-  LIGHT = 'light',
-  DARK = 'dark',
-}
 
 export const ThemeContext = createContext<any>({
   theme: THEMES.DARK,
