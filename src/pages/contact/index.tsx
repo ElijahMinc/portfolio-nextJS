@@ -4,24 +4,32 @@ import { transition1 } from '@/shared/constants/transitions';
 import { useCursor, useTextAnimation } from '@/shared/hooks';
 import { GetStaticProps } from 'next';
 import client from '../../../contentful/index';
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { SendContactForm } from '@/features';
 import { withParticles } from '@/shared/hoc/withParticles';
+import { EntrySkeletonType } from 'contentful';
+import { IContactPageFields, IHeaderFields } from '@/shared/types/contentful';
+import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
 
-const Contact = ({ contactPageContent }: any) => {
+interface ContactPageProps extends Record<string, unknown> {
+  contactPage: EntrySkeletonType<IContactPageFields>;
+
+  headerContent: EntrySkeletonType<IHeaderFields>;
+}
+
+const Contact = ({ contactPage }: ContactPageProps) => {
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
   const titleRef = useRef(null);
 
-  const title = contactPageContent.fields?.title || 'Name has been changed :C';
+  const title = contactPage?.fields?.title;
 
-  const subtitle = documentToHtmlString(contactPageContent.fields?.subtitle, {
+  const subtitle = getDocumentToHtmlString(contactPage.fields?.subtitle, {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, next) => next(node.content),
     },
   });
 
-  const personImg = contactPageContent.fields?.image?.fields?.file?.url || null;
+  const personImg = contactPage?.fields?.image?.fields?.file?.url;
 
   useTextAnimation(titleRef.current, title);
 
@@ -68,7 +76,7 @@ const Contact = ({ contactPageContent }: any) => {
               transition={transition1}
               className="lg:flex-1 z-10"
             >
-              <img src={personImg} alt="Person Img" />
+              <img src={personImg as string} alt="Person Img" />
             </motion.div>
           )}
         </div>
@@ -80,20 +88,22 @@ const Contact = ({ contactPageContent }: any) => {
 export default withParticles(Contact);
 
 export const getStaticProps: GetStaticProps = async () => {
-  const contactPage = await client.getEntries<any>({
+  const contactPage = await client.getEntries<
+    EntrySkeletonType<IContactPageFields>
+  >({
     content_type: 'contactPage',
   });
-  const header = await client.getEntries<any>({
+  const header = await client.getEntries<EntrySkeletonType<IHeaderFields>>({
     content_type: 'header',
   });
 
-  const [headerContent] = header.items;
   const [contactPageContent] = contactPage.items;
+  const [headerContent] = header.items;
 
   return {
     props: {
+      contactPage: contactPageContent ?? null,
       headerContent: headerContent ?? null,
-      contactPageContent: contactPageContent ?? null,
     },
     revalidate: 10,
   };

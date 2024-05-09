@@ -1,5 +1,7 @@
-import { useTheme } from '@/shared/hooks';
 import React, { useState, useEffect, createContext } from 'react';
+import { useTheme } from '@/shared/hooks';
+import { motion } from 'framer-motion';
+import cn from 'classnames';
 
 export const CursorContext = createContext();
 
@@ -104,6 +106,19 @@ export const CursorProvider = ({ children }) => {
       }}
     >
       {children}
+
+      <motion.div
+        variants={cursorVariants}
+        animate={cursorBg}
+        className={cn(
+          ` w-[32px] h-[32px] fixed top-[-100%] left-[-100%] lg:top-[0%] lg:left-[0%] pointer-events-none z-50 rounded-full `,
+          {
+            ['none']: cursorBg,
+            ['hidden']: !cursorBg,
+            ['opacity-70']: cursorBg === 'default',
+          },
+        )}
+      />
     </CursorContext.Provider>
   );
 };

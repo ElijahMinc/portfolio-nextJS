@@ -7,16 +7,28 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { useState } from 'react';
 import { withParticles } from '@/shared/hoc/withParticles';
+import { EntrySkeletonType } from 'contentful';
+import {
+  IHeaderFields,
+  IPortfolioPageFields,
+  IVideosFields,
+} from '@/shared/types/contentful';
+import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
 
-const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
-  const title = portfolioPageContent.fields?.title || null;
-  const description = !!portfolioPageContent.fields?.subtitle
-    ? documentToHtmlString(portfolioPageContent.fields?.subtitle, {
-        renderNode: {
-          [BLOCKS.PARAGRAPH]: (node, next) => next(node.content),
-        },
-      })
-    : null;
+interface PortfolioPageProps extends Record<string, unknown> {
+  portfolioPage: EntrySkeletonType<IPortfolioPageFields>;
+  videosContent: any;
+
+  headerContent: EntrySkeletonType<IHeaderFields>;
+}
+
+const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
+  const title = portfolioPage.fields?.title || null;
+  const description = getDocumentToHtmlString(portfolioPage.fields?.subtitle, {
+    renderNode: {
+      [BLOCKS.PARAGRAPH]: (node, next) => next(node.content),
+    },
+  });
 
   const [currentWork, setCurrentWork] = useState({
     title,
@@ -31,11 +43,11 @@ const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
     setCursorDefault,
   } = useCursor();
 
-  const buttonText = portfolioPageContent.fields?.buttonText;
+  const buttonText = portfolioPage?.fields?.buttonText;
 
-  const previewPortfolioWorks = portfolioPageContent.fields?.images || [];
+  const previewPortfolioWorks = portfolioPage?.fields?.images || [];
 
-  const videos = videosContent.items as any[];
+  const videos = (videosContent?.items || []) as any[];
 
   return (
     <motion.section
@@ -88,40 +100,56 @@ const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
               onMouseLeave={setCursorDefault}
               className="grid lg:grid-cols-2 gap-2 lg:flex-[0_0_60%] relative z-10"
             >
-              {previewPortfolioWorks.map((portfolioWork: any) => (
-                <div
-                  key={portfolioWork.fields.file.url}
-                  className="max-w-full lg:max-w-full h-[187px] lg:h-[220px] bg-accent overflow-hidden"
-                  onClick={() => {
-                    const work =
-                      portfolioPageContent.fields.workLinks[
-                        portfolioWork.fields.title
-                      ];
+              {previewPortfolioWorks.map((portfolioWork, idx) => {
+                const titleOfCurrentPortfolioWork = portfolioWork?.fields
+                  ?.title as string;
 
-                    setCurrentWork({
-                      title: work.title,
-                      description: work.description,
-                      link: work.link,
-                    });
-                  }}
-                >
-                  <img
-                    className={`object-cover w-full h-full lg:h-[220px] hover:scale-95 transition-all duration-500 cursor-pointer
-                    ${
-                      portfolioWork.fields.title.toLowerCase() ===
-                      currentWork.title.toLowerCase()
-                        ? 'scale-75'
-                        : ''
-                    }
+                const descriptionOfCurrentPortfolioWork = portfolioWork?.fields
+                  ?.description as string;
+
+                const linkOfCurrentPortfolioWork = portfolioWork?.fields?.file
+                  ?.url as string;
+
+                const isChoosenLink =
+                  titleOfCurrentPortfolioWork?.toLowerCase() ===
+                  currentWork?.title?.toLowerCase();
+
+                const seoDescription =
+                  titleOfCurrentPortfolioWork +
+                  descriptionOfCurrentPortfolioWork;
+
+                return (
+                  <div
+                    key={idx}
+                    className="max-w-full lg:max-w-full h-[187px] lg:h-[220px] bg-accent overflow-hidden"
+                    onClick={() => {
+                      if (!portfolioPage) return;
+                      if (!portfolioWork?.fields?.title) return;
+
+                      const work =
+                        portfolioPage.fields?.workLinks?.[
+                          portfolioWork?.fields?.title as string
+                        ];
+
+                      if (!work) return;
+
+                      setCurrentWork({
+                        title: work.title,
+                        description: work.description,
+                        link: work.link,
+                      });
+                    }}
+                  >
+                    <img
+                      className={`object-cover w-full h-full lg:h-[220px] hover:scale-95 transition-all duration-500 cursor-pointer
+                    ${isChoosenLink ? 'scale-75' : ''}
                     `}
-                    src={portfolioWork.fields.file.url}
-                    alt={
-                      portfolioWork.fields.title +
-                      portfolioWork.fields.description
-                    }
-                  />
-                </div>
-              ))}
+                      src={linkOfCurrentPortfolioWork}
+                      alt={seoDescription}
+                    />
+                  </div>
+                );
+              })}
             </motion.div>
           )}
         </div>
@@ -158,15 +186,19 @@ const Portfolio = ({ portfolioPageContent, videosContent }: any) => {
 export default withParticles(Portfolio);
 
 export const getStaticProps: GetStaticProps = async () => {
-  const portfolioPage = await client.getEntries<any>({
+  const portfolioPage = await client.getEntries<
+    EntrySkeletonType<IPortfolioPageFields>
+  >({
     content_type: 'portfolioPage',
   });
 
-  const videosContent = await client.getEntries<any>({
+  const videosContent = await client.getEntries<
+    EntrySkeletonType<IVideosFields>
+  >({
     content_type: 'videos',
   });
 
-  const header = await client.getEntries<any>({
+  const header = await client.getEntries<EntrySkeletonType<IHeaderFields>>({
     content_type: 'header',
   });
 
@@ -175,9 +207,9 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      headerContent: headerContent ?? null,
-      portfolioPageContent: portfolioPageContent ?? null,
+      portfolioPage: portfolioPageContent ?? null,
       videosContent: videosContent ?? null,
+      headerContent: headerContent ?? null,
     },
     revalidate: 3600,
   };

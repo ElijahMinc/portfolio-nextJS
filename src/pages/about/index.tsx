@@ -2,24 +2,31 @@ import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { transition1 } from '@/shared/constants/transitions';
-import { useCursor, useTextAnimation, useTheme } from '@/shared/hooks';
+import { useCursor, useTextAnimation } from '@/shared/hooks';
 import { GetStaticProps } from 'next';
 import client from '../../../contentful/index';
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { ROUTES } from '@/shared/constants/routes';
 import { withParticles } from '@/shared/hoc/withParticles';
+import { EntrySkeletonType } from 'contentful';
+import { IAboutPageFields, IHeaderFields } from '@/shared/types/contentful';
+import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
 
-const About = ({ aboutPageContent }: any) => {
-  const { theme } = useTheme();
+interface AboutPageProps extends Record<string, unknown> {
+  aboutPage: EntrySkeletonType<IAboutPageFields>;
+
+  headerContent: EntrySkeletonType<IHeaderFields>;
+}
+
+const About = ({ aboutPage }: AboutPageProps) => {
   const titleRef = useRef(null);
 
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
 
-  const title = aboutPageContent?.fields?.title;
+  const title = aboutPage?.fields?.title;
 
-  const subtitle = documentToHtmlString(aboutPageContent?.fields?.description);
+  const subtitle = getDocumentToHtmlString(aboutPage?.fields?.description);
 
-  const personImg = aboutPageContent?.fields?.image?.fields?.file?.url || '';
+  const personImg = aboutPage?.fields?.image?.fields?.file?.url || '';
 
   useTextAnimation(titleRef.current, title);
 
@@ -35,18 +42,22 @@ const About = ({ aboutPageContent }: any) => {
 
       <div className="container mx-auto relative ">
         {/* text and img wrapepr */}
+
         <div className="flex flex-col lg:flex-row h-full items-center justify-center gap-x-24 text-center lg:text-left lg:pt-16 ">
-          <motion.div
-            initial={{ opacity: 0, x: '-50%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '-50%' }}
-            onMouseEnter={mouseEnterHandle}
-            onMouseLeave={mouseLeaveHandle}
-            transition={transition1}
-            className="flex-1 max-h-96 lg:max-h-full order-2 lg:order-none overflow-hidden lg:static lg:blur-none absolute top-0 left-0 w-full h-full blur-sm pointer-events-none lg:pointer-events-auto"
-          >
-            <img src={personImg} alt="person img" />
-          </motion.div>
+          {personImg && (
+            <motion.div
+              initial={{ opacity: 0, x: '-50%' }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: '-50%' }}
+              onMouseEnter={mouseEnterHandle}
+              onMouseLeave={mouseLeaveHandle}
+              transition={transition1}
+              className="flex-1 max-h-96 lg:max-h-full order-2 lg:order-none overflow-hidden lg:static lg:blur-none absolute top-0 left-0 w-full h-full blur-sm pointer-events-none lg:pointer-events-auto"
+            >
+              <img src={personImg as string} alt="person img" />
+            </motion.div>
+          )}
+
           {/* text */}
           <div
             onMouseEnter={mouseEnterHandle}
@@ -82,21 +93,24 @@ const About = ({ aboutPageContent }: any) => {
 export default withParticles(About);
 
 export const getStaticProps: GetStaticProps = async () => {
-  const aboutPage = await client.getEntries<any>({
+  const aboutPage = await client.getEntries<
+    EntrySkeletonType<IAboutPageFields>
+  >({
     content_type: 'aboutPage',
   });
 
-  const header = await client.getEntries<any>({
+  const header = await client.getEntries<EntrySkeletonType<IHeaderFields>>({
     content_type: 'header',
     limit: 2,
   });
 
-  const [headerContent] = header.items;
   const [aboutPageContent] = aboutPage.items;
+
+  const [headerContent] = header.items;
 
   return {
     props: {
-      aboutPageContent: aboutPageContent ?? null,
+      aboutPage: aboutPageContent ?? null,
       headerContent: headerContent ?? null,
     },
     revalidate: 10,

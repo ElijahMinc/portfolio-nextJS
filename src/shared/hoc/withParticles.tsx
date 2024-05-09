@@ -1,11 +1,13 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import { useCallback } from 'react';
 import Particles from 'react-particles';
-import { loadSlim } from 'tsparticles-slim'; 
+import { loadSlim } from 'tsparticles-slim';
 import type { Engine, RecursivePartial, IOptions } from 'tsparticles-engine';
 import { useTheme } from '../hooks';
 import { THEMES } from '../constants/themes';
 import { defaultParticleOptions } from '../constants/defaultParticlesOptions';
+import { EntrySkeletonType } from 'contentful';
+import { IHeaderFields } from '../types/contentful';
 
 export const ParticlesLayout = ({
   children,
@@ -44,7 +46,11 @@ export const ParticlesLayout = ({
   );
 };
 
-export const withParticles = <T extends Record<string, unknown>>(
+export const withParticles = <
+  T extends Record<string, unknown> & {
+    headerContent: EntrySkeletonType<IHeaderFields>;
+  },
+>(
   Component: FunctionComponent<T>,
 ) => {
   return function withLayoutComponent(props: T) {

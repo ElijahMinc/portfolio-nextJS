@@ -12,6 +12,9 @@ export interface IAboutPageFields {
 
   /** Image */
   image?: Asset | undefined;
+
+  /** Button Text */
+  buttonText?: Document | undefined;
 }
 
 /** This is content for about page */
@@ -103,6 +106,9 @@ export interface IHomePageFields {
 
   /** Home button */
   homeButton?: Document | undefined;
+
+  /** CV */
+  cv?: Asset | undefined;
 }
 
 export interface IHomePage extends Entry<IHomePageFields> {
@@ -134,6 +140,9 @@ export interface IPortfolioPageFields {
 
   /** Images */
   images?: Asset[] | undefined;
+
+  /** work_links */
+  workLinks?: Record<string, any> | undefined;
 }
 
 /** Content for protfolio page */

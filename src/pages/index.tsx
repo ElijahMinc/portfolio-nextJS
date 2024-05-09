@@ -5,25 +5,33 @@ import { transition1 } from '@/shared/constants/transitions';
 import { GetStaticProps } from 'next';
 import client from '../../contentful/index';
 import { BLOCKS } from '@contentful/rich-text-types';
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { useRef } from 'react';
 import { ImFilePdf } from 'react-icons/im';
 import { ROUTES } from '@/shared/constants/routes';
 import { withParticles } from '@/shared/hoc/withParticles';
+import { IHeaderFields, IHomePageFields } from '@/shared/types/contentful';
+import { AssetFile, EntrySkeletonType } from 'contentful';
+import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
 
-const Home = ({ homePage }: { homePage: any }) => {
+interface HomePageProps extends Record<string, unknown> {
+  homePage: EntrySkeletonType<IHomePageFields>;
+
+  headerContent: EntrySkeletonType<IHeaderFields>;
+}
+
+const Home = ({ homePage }: HomePageProps) => {
   const { theme } = useTheme();
   const titleRef = useRef(null);
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
   const title = homePage?.fields?.title;
 
-  const subtitle = documentToHtmlString(homePage?.fields?.description);
+  const subtitle = getDocumentToHtmlString(homePage?.fields?.description);
 
-  const personUrl = homePage?.fields?.person?.fields?.file?.url || '';
+  const personUrl = homePage?.fields?.person?.fields?.file?.url as string;
 
-  const CV = homePage?.fields?.cv?.fields?.file;
+  const CV = homePage?.fields?.cv?.fields?.file as AssetFile;
 
-  const buttonText = documentToHtmlString(homePage?.fields?.homeButton, {
+  const buttonText = getDocumentToHtmlString(homePage?.fields?.homeButton, {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, next) => next(node.content),
     },
@@ -114,19 +122,20 @@ const Home = ({ homePage }: { homePage: any }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const homePage = await client.getEntries<any>({
+  const homePage = await client.getEntries<EntrySkeletonType<IHomePageFields>>({
     content_type: 'homePage',
     limit: 1,
   });
 
-  const header = await client.getEntries<any>({
+  const header = await client.getEntries<EntrySkeletonType<IHeaderFields>>({
     content_type: 'header',
     limit: 2,
   });
 
+  const [homePageContent] = homePage.items;
+
   const [headerContent] = header.items;
 
-  const [homePageContent] = homePage.items;
   return {
     props: {
       homePage: homePageContent ?? null,
