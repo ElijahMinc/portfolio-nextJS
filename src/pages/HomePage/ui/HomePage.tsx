@@ -2,24 +2,16 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useCursor, useTextAnimation, useTheme } from '@/shared/hooks';
 import { transition1 } from '@/shared/constants/transitions';
-import { GetStaticProps } from 'next';
-import client from '../../contentful/index';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { useRef } from 'react';
 import { ImFilePdf } from 'react-icons/im';
 import { ROUTES } from '@/shared/constants/routes';
 import { withParticles } from '@/shared/hoc/withParticles';
-import { IHeaderFields, IHomePageFields } from '@/shared/types/contentful';
-import { AssetFile, EntrySkeletonType } from 'contentful';
+import { AssetFile } from 'contentful';
 import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
+import { HomePageProps } from '../types/props';
 
-interface HomePageProps extends Record<string, unknown> {
-  homePage: EntrySkeletonType<IHomePageFields>;
-
-  headerContent: EntrySkeletonType<IHeaderFields>;
-}
-
-const Home = ({ homePage }: HomePageProps) => {
+const HomePage = ({ homePage }: HomePageProps) => {
   const { theme } = useTheme();
   const titleRef = useRef(null);
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
@@ -121,28 +113,4 @@ const Home = ({ homePage }: HomePageProps) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const homePage = await client.getEntries<EntrySkeletonType<IHomePageFields>>({
-    content_type: 'homePage',
-    limit: 1,
-  });
-
-  const header = await client.getEntries<EntrySkeletonType<IHeaderFields>>({
-    content_type: 'header',
-    limit: 2,
-  });
-
-  const [homePageContent] = homePage.items;
-
-  const [headerContent] = header.items;
-
-  return {
-    props: {
-      homePage: homePageContent ?? null,
-      headerContent: headerContent ?? null,
-    },
-    revalidate: 10,
-  };
-};
-
-export default withParticles(Home);
+export default withParticles(HomePage);

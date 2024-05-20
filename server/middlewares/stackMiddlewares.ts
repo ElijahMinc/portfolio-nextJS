@@ -1,6 +1,8 @@
 import { NextMiddleware, NextResponse } from 'next/server';
 
-export type MiddlewareFactory = (nextMiddleware: NextMiddleware) => NextMiddleware;
+export type MiddlewareFactory = (
+  nextMiddleware: NextMiddleware,
+) => NextMiddleware;
 
 export function stackMiddlewares(
   functions: MiddlewareFactory[] = [],
@@ -15,3 +17,5 @@ export function stackMiddlewares(
 
   return () => NextResponse.next();
 }
+
+//!TODO Troubles HERE

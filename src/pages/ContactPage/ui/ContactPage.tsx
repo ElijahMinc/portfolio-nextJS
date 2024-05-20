@@ -2,20 +2,11 @@ import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { transition1 } from '@/shared/constants/transitions';
 import { useCursor, useTextAnimation } from '@/shared/hooks';
-import { GetStaticProps } from 'next';
-import client from '../../../contentful/index';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { SendContactForm } from '@/features';
 import { withParticles } from '@/shared/hoc/withParticles';
-import { EntrySkeletonType } from 'contentful';
-import { IContactPageFields, IHeaderFields } from '@/shared/types/contentful';
 import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
-
-interface ContactPageProps extends Record<string, unknown> {
-  contactPage: EntrySkeletonType<IContactPageFields>;
-
-  headerContent: EntrySkeletonType<IHeaderFields>;
-}
+import { ContactPageProps } from '../types/props';
 
 const Contact = ({ contactPage }: ContactPageProps) => {
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
@@ -86,25 +77,3 @@ const Contact = ({ contactPage }: ContactPageProps) => {
 };
 
 export default withParticles(Contact);
-
-export const getStaticProps: GetStaticProps = async () => {
-  const contactPage = await client.getEntries<
-    EntrySkeletonType<IContactPageFields>
-  >({
-    content_type: 'contactPage',
-  });
-  const header = await client.getEntries<EntrySkeletonType<IHeaderFields>>({
-    content_type: 'header',
-  });
-
-  const [contactPageContent] = contactPage.items;
-  const [headerContent] = header.items;
-
-  return {
-    props: {
-      contactPage: contactPageContent ?? null,
-      headerContent: headerContent ?? null,
-    },
-    revalidate: 10,
-  };
-};

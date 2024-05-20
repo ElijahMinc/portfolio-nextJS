@@ -1,26 +1,12 @@
 import { motion } from 'framer-motion';
 import { transition1 } from '@/shared/constants/transitions';
 import { useCursor } from '@/shared/hooks';
-import { GetStaticProps } from 'next';
-import client from '../../../contentful/index';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { useState } from 'react';
 import { withParticles } from '@/shared/hoc/withParticles';
-import { EntrySkeletonType } from 'contentful';
-import {
-  IHeaderFields,
-  IPortfolioPageFields,
-  IVideosFields,
-} from '@/shared/types/contentful';
 import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
-
-interface PortfolioPageProps extends Record<string, unknown> {
-  portfolioPage: EntrySkeletonType<IPortfolioPageFields>;
-  videosContent: any;
-
-  headerContent: EntrySkeletonType<IHeaderFields>;
-}
+import { PortfolioPageProps } from '../types/props';
 
 const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
   const title = portfolioPage.fields?.title || null;
@@ -184,33 +170,3 @@ const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
 };
 
 export default withParticles(Portfolio);
-
-export const getStaticProps: GetStaticProps = async () => {
-  const portfolioPage = await client.getEntries<
-    EntrySkeletonType<IPortfolioPageFields>
-  >({
-    content_type: 'portfolioPage',
-  });
-
-  const videosContent = await client.getEntries<
-    EntrySkeletonType<IVideosFields>
-  >({
-    content_type: 'videos',
-  });
-
-  const header = await client.getEntries<EntrySkeletonType<IHeaderFields>>({
-    content_type: 'header',
-  });
-
-  const [headerContent] = header.items;
-  const [portfolioPageContent] = portfolioPage.items;
-
-  return {
-    props: {
-      portfolioPage: portfolioPageContent ?? null,
-      videosContent: videosContent ?? null,
-      headerContent: headerContent ?? null,
-    },
-    revalidate: 3600,
-  };
-};

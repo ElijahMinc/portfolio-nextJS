@@ -3,19 +3,10 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { transition1 } from '@/shared/constants/transitions';
 import { useCursor, useTextAnimation } from '@/shared/hooks';
-import { GetStaticProps } from 'next';
-import client from '../../../contentful/index';
 import { ROUTES } from '@/shared/constants/routes';
 import { withParticles } from '@/shared/hoc/withParticles';
-import { EntrySkeletonType } from 'contentful';
-import { IAboutPageFields, IHeaderFields } from '@/shared/types/contentful';
 import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
-
-interface AboutPageProps extends Record<string, unknown> {
-  aboutPage: EntrySkeletonType<IAboutPageFields>;
-
-  headerContent: EntrySkeletonType<IHeaderFields>;
-}
+import { AboutPageProps } from '../types/props';
 
 const About = ({ aboutPage }: AboutPageProps) => {
   const titleRef = useRef(null);
@@ -91,28 +82,3 @@ const About = ({ aboutPage }: AboutPageProps) => {
 };
 
 export default withParticles(About);
-
-export const getStaticProps: GetStaticProps = async () => {
-  const aboutPage = await client.getEntries<
-    EntrySkeletonType<IAboutPageFields>
-  >({
-    content_type: 'aboutPage',
-  });
-
-  const header = await client.getEntries<EntrySkeletonType<IHeaderFields>>({
-    content_type: 'header',
-    limit: 2,
-  });
-
-  const [aboutPageContent] = aboutPage.items;
-
-  const [headerContent] = header.items;
-
-  return {
-    props: {
-      aboutPage: aboutPageContent ?? null,
-      headerContent: headerContent ?? null,
-    },
-    revalidate: 10,
-  };
-};
