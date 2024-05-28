@@ -8,6 +8,7 @@ import {
 } from '@/shared/types/contentful';
 import { PortfolioPageProps } from '@/pages/PortfolioPage/types/props';
 import { PortfolioPage } from '@/pages/PortfolioPage';
+import { oneHourOfRevalidationPage } from '@/shared/constants/revalidateTimes';
 
 const Portfolio = ({
   headerContent,
@@ -51,6 +52,6 @@ export const getStaticProps: GetStaticProps = async () => {
       videosContent: videosContent ?? null,
       headerContent: headerContent ?? null,
     },
-    revalidate: 3600,
+    revalidate: oneHourOfRevalidationPage,
   };
 };

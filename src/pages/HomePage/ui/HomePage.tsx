@@ -10,6 +10,8 @@ import { withParticles } from '@/shared/hoc/withParticles';
 import { AssetFile } from 'contentful';
 import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
 import { HomePageProps } from '../types/props';
+import Image from 'next/image';
+import { imageQuality } from '@/shared/constants/images';
 
 const HomePage = ({ homePage }: HomePageProps) => {
   const { theme } = useTheme();
@@ -97,13 +99,27 @@ const HomePage = ({ homePage }: HomePageProps) => {
                 transition={transition1}
                 className="relative right-0 w-[700px] h-[700px] z-30"
               >
-                <motion.img
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  transition={transition1}
+                  className="absolute lg:top-0 lg:left-0 top-[-30px] left-[50px] w-[95%] h-[95%] z-10 "
+                >
+                  <Image
+                    quality={imageQuality}
+                    className="object-cover"
+                    fill
+                    src={`https:${personUrl}`}
+                    alt="Ilya_Prtosenko_Frontend"
+                  />
+                </motion.div>
+
+                {/* <motion.img
                   className=" absolute lg:top-0 lg:left-0 top-[-30px] left-[50px] w-[95%] h-[95%] z-10 object-cover "
                   whileHover={{ scale: 1.1 }}
                   transition={transition1}
                   src={personUrl}
                   alt="Me"
-                />
+                /> */}
               </motion.div>
             </div>
           )}

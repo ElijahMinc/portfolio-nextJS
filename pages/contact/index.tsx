@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next';
 import client from '../../contentful';
 import { EntrySkeletonType } from 'contentful';
 import { IContactPageFields, IHeaderFields } from '@/shared/types/contentful';
+import { oneHourOfRevalidationPage } from '@/shared/constants/revalidateTimes';
 
 const Contact = ({ contactPage, headerContent }: ContactPageProps) => {
   return (
@@ -30,6 +31,6 @@ export const getStaticProps: GetStaticProps = async () => {
       contactPage: contactPageContent ?? null,
       headerContent: headerContent ?? null,
     },
-    revalidate: 10,
+    revalidate: oneHourOfRevalidationPage,
   };
 };

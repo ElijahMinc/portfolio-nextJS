@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { withParticles } from '@/shared/hoc/withParticles';
 import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
 import { PortfolioPageProps } from '../types/props';
+import Image from 'next/image';
 
 const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
   const title = portfolioPage.fields?.title || null;
@@ -84,7 +85,7 @@ const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
               transition={transition1}
               onMouseEnter={mouseEnterHandle}
               onMouseLeave={setCursorDefault}
-              className="grid lg:grid-cols-2 gap-2 lg:flex-[0_0_60%] relative z-10"
+              className="grid lg:grid-cols-2 gap-2 lg:flex-[0_1_60%] relative z-10"
             >
               {previewPortfolioWorks.map((portfolioWork, idx) => {
                 const titleOfCurrentPortfolioWork = portfolioWork?.fields
@@ -107,7 +108,7 @@ const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
                 return (
                   <div
                     key={idx}
-                    className="max-w-full lg:max-w-full h-[187px] lg:h-[220px] bg-accent overflow-hidden"
+                    className="w-[300px] lg:max-w-full h-[220px] lg:h-[220px] bg-accent overflow-hidden"
                     onClick={() => {
                       if (!portfolioPage) return;
                       if (!portfolioWork?.fields?.title) return;
@@ -126,13 +127,16 @@ const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
                       });
                     }}
                   >
-                    <img
-                      className={`object-cover w-full h-full lg:h-[220px] hover:scale-95 transition-all duration-500 cursor-pointer
-                    ${isChoosenLink ? 'scale-75' : ''}
-                    `}
-                      src={linkOfCurrentPortfolioWork}
-                      alt={seoDescription}
-                    />
+                    <div className="relative  lg:w-full h-[220px] lg:h-[220px] hover:scale-95 transition-all duration-500 cursor-pointer">
+                      <Image
+                        className={`object-cover 
+                          ${isChoosenLink ? 'scale-75' : ''}
+                          `}
+                        fill
+                        src={`https:${linkOfCurrentPortfolioWork}`}
+                        alt={seoDescription}
+                      />
+                    </div>
                   </div>
                 );
               })}

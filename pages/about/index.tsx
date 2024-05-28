@@ -3,6 +3,7 @@ import client from '../../contentful';
 import { EntrySkeletonType } from 'contentful';
 import { IAboutPageFields, IHeaderFields } from '@/shared/types/contentful';
 import { AboutPage, type AboutPageProps } from '@/pages/AboutPage';
+import { oneHourOfRevalidationPage } from '@/shared/constants/revalidateTimes';
 
 export const About = ({ aboutPage, headerContent }: AboutPageProps) => {
   return <AboutPage aboutPage={aboutPage} headerContent={headerContent} />;
@@ -31,6 +32,6 @@ export const getStaticProps: GetStaticProps = async () => {
       aboutPage: aboutPageContent ?? null,
       headerContent: headerContent ?? null,
     },
-    revalidate: 10,
+    revalidate: oneHourOfRevalidationPage,
   };
 };

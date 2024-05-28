@@ -3,6 +3,7 @@ import client from '../contentful';
 import { EntrySkeletonType } from 'contentful';
 import { IHeaderFields, IHomePageFields } from '@/shared/types/contentful';
 import { HomePage, type HomePageProps } from '@/pages/HomePage';
+import { oneHourOfRevalidationPage } from '@/shared/constants/revalidateTimes';
 
 const Home = ({ headerContent, homePage }: HomePageProps) => {
   return <HomePage homePage={homePage} headerContent={headerContent} />;
@@ -30,6 +31,6 @@ export const getStaticProps: GetStaticProps = async () => {
       homePage: homePageContent ?? null,
       headerContent: headerContent ?? null,
     },
-    revalidate: 10,
+    revalidate: oneHourOfRevalidationPage,
   };
 };

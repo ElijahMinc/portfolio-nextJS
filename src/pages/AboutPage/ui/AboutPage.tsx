@@ -7,6 +7,8 @@ import { ROUTES } from '@/shared/constants/routes';
 import { withParticles } from '@/shared/hoc/withParticles';
 import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
 import { AboutPageProps } from '../types/props';
+import Image from 'next/image';
+import { imageQuality } from '@/shared/constants/images';
 
 const About = ({ aboutPage }: AboutPageProps) => {
   const titleRef = useRef(null);
@@ -43,9 +45,15 @@ const About = ({ aboutPage }: AboutPageProps) => {
               onMouseEnter={mouseEnterHandle}
               onMouseLeave={mouseLeaveHandle}
               transition={transition1}
-              className="flex-1 max-h-96 lg:max-h-full order-2 lg:order-none overflow-hidden lg:static lg:blur-none absolute top-0 left-0 w-full h-full blur-sm pointer-events-none lg:pointer-events-auto"
+              className="absolute flex-1 max-h-96 lg:max-h-full order-2 lg:order-none overflow-hidden lg:relative lg:blur-none top-0  left-50% lg:left-0 w-[500px] h-[500px] blur-sm pointer-events-none lg:pointer-events-auto"
             >
-              <img src={personImg as string} alt="person img" />
+              <Image
+                quality={imageQuality}
+                className="object-cover"
+                fill
+                src={`https:${personImg}`}
+                alt="Ilya_Prtosenko_Frontend"
+              />
             </motion.div>
           )}
 
