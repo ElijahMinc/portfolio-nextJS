@@ -20,9 +20,9 @@ export default function Application({
   const socials = pageProps?.headerContent?.fields?.socials;
 
   const seo = pageProps?.seo?.fields;
-  const seoPreviewImage = seo?.title;
-  const seoTitle = seo?.description;
-  const seoDescription = seo?.previewImage?.fields?.file?.url;
+  const seoTitle = seo?.title;
+  const seoDescription = seo?.description;
+  const seoPreviewImage = seo?.previewImage?.fields?.file?.url;
 
   return (
     <ProgressLayout>

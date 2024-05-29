@@ -1,5 +1,4 @@
 import { BaseSeoProps } from '@/shared/types/seo.type';
-import Head from 'next/head';
 
 export const BaseSeo = ({
   title,

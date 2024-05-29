@@ -1,6 +1,4 @@
-import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
 import { SpecificSeoParams } from '@/shared/types/seo.type';
-import { BLOCKS } from '@contentful/rich-text-types';
 
 export const TwitterSeo = ({
   title = '',
