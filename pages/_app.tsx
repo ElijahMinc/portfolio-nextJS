@@ -18,8 +18,11 @@ export default function Application({
 }: AppProps & { headerContent: EntrySkeletonType<IHeaderFields> } & SeoProps) {
   const logoUrl = pageProps?.headerContent?.fields?.logo?.fields?.file?.url;
   const socials = pageProps?.headerContent?.fields?.socials;
-  const { title, description, previewImage } = pageProps.seo?.fields;
-  const seoPreviewImage = previewImage?.fields?.file?.url;
+
+  const seo = pageProps?.seo?.fields;
+  const seoPreviewImage = seo?.title;
+  const seoTitle = seo?.description;
+  const seoDescription = seo?.previewImage?.fields?.file?.url;
 
   return (
     <ProgressLayout>
@@ -28,8 +31,8 @@ export default function Application({
           <AppLayout
             Seo={
               <Seo
-                title={title}
-                description={description}
+                title={seoTitle}
+                description={seoDescription}
                 previewImage={seoPreviewImage}
                 locale={Locales.EN}
                 isIndexablePage
