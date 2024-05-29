@@ -21,7 +21,7 @@ export const OgSeo = ({
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:site_name" content="Wannacook.ai" />
+      <meta property="og:site_name" content={title} />
     </>
   );
 };
