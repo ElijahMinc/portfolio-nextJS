@@ -10,7 +10,7 @@ export const BaseSeo = ({
     <>
       {!isIndexablePage && <meta name="robots" content="noindex" />}
       <title>{title}</title>
-      <meta http-equiv="content-language" content={locale} />
+      <meta httpEquiv="content-language" content={locale} />
       <meta name="description" content={description} />
     </>
   );

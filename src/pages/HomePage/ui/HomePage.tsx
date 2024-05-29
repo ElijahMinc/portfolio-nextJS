@@ -86,7 +86,7 @@ const HomePage = ({ homePage }: HomePageProps) => {
           </div>
           {personUrl && (
             <div
-              className={`justify-end lg:max-h-full lg:static lg:blur-none absolute top-0 left-0 w-full h-full blur-[1px] pointer-events-none lg:pointer-events-auto overflow-hidden lg:flex  ${
+              className={`hidden justify-end lg:max-h-full lg:static lg:blur-none absolute top-0 left-0 w-full h-full blur-[1px] pointer-events-none lg:pointer-events-auto overflow-hidden lg:flex  ${
                 theme === 'light' ? 'hidden' : 'flex'
               }`}
             >
@@ -112,14 +112,6 @@ const HomePage = ({ homePage }: HomePageProps) => {
                     alt="Ilya_Prtosenko_Frontend"
                   />
                 </motion.div>
-
-                {/* <motion.img
-                  className=" absolute lg:top-0 lg:left-0 top-[-30px] left-[50px] w-[95%] h-[95%] z-10 object-cover "
-                  whileHover={{ scale: 1.1 }}
-                  transition={transition1}
-                  src={personUrl}
-                  alt="Me"
-                /> */}
               </motion.div>
             </div>
           )}
