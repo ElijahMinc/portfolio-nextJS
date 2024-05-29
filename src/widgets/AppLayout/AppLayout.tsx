@@ -3,7 +3,6 @@ import { Mulish } from 'next/font/google';
 import { mergeClassNames } from '@/shared/lib/classNames/mergeClassNames';
 import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
-import Head from 'next/head';
 import { ThemeSwitcher } from '@/features';
 
 const MulishFont = Mulish({
@@ -14,14 +13,16 @@ const MulishFont = Mulish({
 export const AppLayout = ({
   children,
   Header,
-}: React.PropsWithChildren & { Header?: React.ReactNode }) => {
+  Seo,
+}: React.PropsWithChildren & {
+  Header?: React.ReactNode;
+  Seo?: React.ReactNode;
+}) => {
   const router = useRouter();
 
   return (
     <>
-      <Head>
-        <title>Ilya Protsenko Portfolio</title>
-      </Head>
+      {Seo}
       <div className={mergeClassNames([MulishFont.className])}>
         <ThemeSwitcher />
         {Header}

@@ -164,6 +164,36 @@ export interface IPortfolioPage extends Entry<IPortfolioPageFields> {
   };
 }
 
+export interface ISeoFields {
+  /** title */
+  title: string;
+
+  /** preview-image */
+  previewImage?: Asset | undefined;
+
+  /** description */
+  description?: string | undefined;
+}
+
+/** web-site`s seo */
+
+export interface ISeo extends Entry<ISeoFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'seo';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
 export interface IVideosFields {
   /** Video title */
   videoTitle?: Document | undefined;
@@ -195,6 +225,7 @@ export type CONTENT_TYPE =
   | 'header'
   | 'homePage'
   | 'portfolioPage'
+  | 'seo'
   | 'videos';
 
 export type IEntry =
@@ -203,6 +234,7 @@ export type IEntry =
   | IHeader
   | IHomePage
   | IPortfolioPage
+  | ISeo
   | IVideos;
 
 export type LOCALE_CODE = 'en-US';

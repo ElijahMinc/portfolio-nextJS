@@ -4,6 +4,7 @@ import { EntrySkeletonType } from 'contentful';
 import {
   IHeaderFields,
   IPortfolioPageFields,
+  ISeoFields,
   IVideosFields,
 } from '@/shared/types/contentful';
 import { PortfolioPageProps } from '@/pages/PortfolioPage/types/props';
@@ -27,6 +28,11 @@ const Portfolio = ({
 export default Portfolio;
 
 export const getStaticProps: GetStaticProps = async () => {
+  const seo = await client.getEntries<EntrySkeletonType<ISeoFields>>({
+    content_type: 'seo',
+    limit: 1,
+  });
+
   const portfolioPage = await client.getEntries<
     EntrySkeletonType<IPortfolioPageFields>
   >({
@@ -44,13 +50,16 @@ export const getStaticProps: GetStaticProps = async () => {
   });
 
   const [headerContent] = header.items;
+
   const [portfolioPageContent] = portfolioPage.items;
+  const [seoContent] = seo.items;
 
   return {
     props: {
       portfolioPage: portfolioPageContent ?? null,
       videosContent: videosContent ?? null,
       headerContent: headerContent ?? null,
+      seo: seoContent ?? null,
     },
     revalidate: oneHourOfRevalidationPage,
   };
