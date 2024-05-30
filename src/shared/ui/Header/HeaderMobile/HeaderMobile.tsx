@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { menuAnimationVariant } from '../constants/menuAnimationVartiants';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { HeaderMobileList } from './HeaderMobileList';
 
 interface HeaderMobileProps {
   navigationData: any[];
@@ -15,9 +16,6 @@ export const HeaderMobile = ({
   navigationData,
   socials,
 }: HeaderMobileProps) => {
-  const router = useRouter();
-  const currentPathName = router.pathname;
-
   const [openMenu, setOpenMenu] = useState(false);
 
   const handleClose = () => setOpenMenu(false);
@@ -45,20 +43,10 @@ export const HeaderMobile = ({
         </div>
 
         <div className="inline-block w-full h-full">
-          <ul className="h-full flex flex-col justify-center items-center gap-y-8 text-primary font-bold text-3xl font-primary">
-            {navigationData.map(({ path, name }) => (
-              <li key={path} onClick={handleClose}>
-                <Link
-                  href={path}
-                  style={
-                    path === currentPathName ? { color: '#3ca8cb' } : undefined
-                  }
-                >
-                  {name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <HeaderMobileList
+            navigationData={navigationData}
+            onClickItem={handleClose}
+          />
         </div>
       </motion.div>
 

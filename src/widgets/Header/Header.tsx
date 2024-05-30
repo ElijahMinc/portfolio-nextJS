@@ -9,7 +9,7 @@ import {
   headerNavigationList,
 } from '@shared/constants/headerNavigationList';
 import { Socials } from '@shared/ui';
-import { useCursor, useTheme } from '@/shared/hooks';
+import { useCursor } from '@/shared/hooks';
 import { Logo } from '@/shared/ui/Logo';
 import { ROUTES } from '@/shared/constants/routes';
 
@@ -33,13 +33,11 @@ export const Header = ({
         />
       }
       rightContent={
-        <>
-          <Socials
-            socials={socials || []}
-            handleMouseEnter={mouseEnterHandle}
-            handleMouseLeave={mouseLeaveHandle}
-          />
-        </>
+        <Socials
+          socials={socials || []}
+          handleMouseEnter={mouseEnterHandle}
+          handleMouseLeave={mouseLeaveHandle}
+        />
       }
       mobile={
         <HeaderMobile
