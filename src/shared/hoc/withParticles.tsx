@@ -1,3 +1,5 @@
+'use client';
+
 import { FunctionComponent, useEffect, useState } from 'react';
 import { useCallback } from 'react';
 import Particles from 'react-particles';
@@ -21,6 +23,8 @@ export const ParticlesLayout = ({
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadSlim(engine);
   }, []);
+
+
 
   useEffect(() => {
     setOptions((prevOptions) => ({
@@ -46,11 +50,7 @@ export const ParticlesLayout = ({
   );
 };
 
-export const withParticles = <
-  T extends Record<string, unknown> & {
-    headerContent: EntrySkeletonType<IHeaderFields>;
-  },
->(
+export const withParticles = <T extends Record<string, unknown>>(
   Component: FunctionComponent<T>,
 ) => {
   return function withLayoutComponent(props: T) {

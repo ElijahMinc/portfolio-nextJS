@@ -1,5 +1,7 @@
+import { Spinner } from "@/shared/ui";
+
 const Loading = () => {
-  return <>loading</>;
+  return <Spinner />
 };
 
 export default Loading;

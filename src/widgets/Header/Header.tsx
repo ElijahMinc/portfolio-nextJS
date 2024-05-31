@@ -9,7 +9,6 @@ import {
   headerNavigationList,
 } from '@shared/constants/headerNavigationList';
 import { Socials } from '@shared/ui';
-import { useCursor } from '@/shared/hooks';
 import { Logo } from '@/shared/ui/Logo';
 import { ROUTES } from '@/shared/constants/routes';
 
@@ -20,25 +19,10 @@ export const Header = ({
   logoUrl: string;
   socials: HeaderNavigationListData[];
 }) => {
-  const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
-
   return (
     <HeaderWrapper
-      logo={
-        <Logo
-          href={ROUTES.HOME}
-          logoUrl={logoUrl}
-          onMouseEnter={mouseEnterHandle}
-          onMouseLeave={mouseLeaveHandle}
-        />
-      }
-      rightContent={
-        <Socials
-          socials={socials || []}
-          handleMouseEnter={mouseEnterHandle}
-          handleMouseLeave={mouseLeaveHandle}
-        />
-      }
+      logo={<Logo href={ROUTES.HOME} logoUrl={logoUrl} />}
+      rightContent={<Socials socials={socials || []} />}
       mobile={
         <HeaderMobile
           navigationData={headerNavigationList}

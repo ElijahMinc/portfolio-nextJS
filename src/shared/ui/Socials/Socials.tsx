@@ -1,3 +1,6 @@
+'use client';
+
+import { useCursor } from '@/shared/hooks';
 import { getSocialIconByNames } from './lib/getSocialIconByNames';
 
 interface SocialsProps extends React.DOMAttributes<HTMLUListElement> {
@@ -11,11 +14,13 @@ export const Socials = ({
   handleMouseLeave,
   socials,
 }: SocialsProps) => {
+  const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
+
   return (
     <ul
       className="flex gap-10"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={mouseEnterHandle}
+      onMouseLeave={mouseLeaveHandle}
     >
       {!!socials?.length &&
         socials.map((socialLink) => {

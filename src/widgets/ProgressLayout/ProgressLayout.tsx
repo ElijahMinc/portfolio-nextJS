@@ -1,13 +1,15 @@
-import Router, { useRouter } from 'next/router';
+'use client';
+import Router from 'next/router';
 import NProgress from 'nprogress'; //nprogress module
 import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 import 'nprogress/nprogress.css'; //styles of nprogress
+import { usePathname } from 'next/navigation';
 
 export const ProgressLayout = ({ children }: React.PropsWithChildren) => {
-  const router = useRouter();
   const [isLoading, setLoading] = useState(false);
+  const pathname = usePathname();
 
   const start = useCallback(() => {
     NProgress.start();
@@ -31,7 +33,7 @@ export const ProgressLayout = ({ children }: React.PropsWithChildren) => {
       Router.events.off('routeChangeComplete', done);
       Router.events.off('routeChangeError', done);
     };
-  }, [router.pathname]);
+  }, [pathname]);
 
   return (
     <div>

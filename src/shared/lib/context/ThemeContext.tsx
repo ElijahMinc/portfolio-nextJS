@@ -1,3 +1,5 @@
+'use client';
+
 import { THEMES } from '@/shared/constants/themes';
 import React, {
   useState,
@@ -7,7 +9,6 @@ import React, {
   useCallback,
   useMemo,
 } from 'react';
-
 
 export const ThemeContext = createContext<any>({
   theme: THEMES.DARK,

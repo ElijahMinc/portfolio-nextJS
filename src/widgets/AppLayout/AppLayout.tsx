@@ -1,9 +1,11 @@
-import { AnimatePresence } from 'framer-motion';
+'use client';
+import { AnimatePresence } from '@shared/lib/animation';
 import { Mulish } from 'next/font/google';
 import { mergeClassNames } from '@/shared/lib/classNames/mergeClassNames';
-import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
+import { usePathname } from 'next/navigation';
 import { ThemeSwitcher } from '@/features';
+// import { ThemeSwitcher } from '@/features';
 
 const MulishFont = Mulish({
   subsets: ['latin'],
@@ -13,21 +15,18 @@ const MulishFont = Mulish({
 export const AppLayout = ({
   children,
   Header,
-  Seo,
 }: React.PropsWithChildren & {
   Header?: React.ReactNode;
-  Seo?: React.ReactNode;
 }) => {
-  const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <>
-      {Seo}
       <div className={mergeClassNames([MulishFont.className])}>
         <ThemeSwitcher />
         {Header}
         <AnimatePresence initial={true} mode="wait">
-          <main key={router.route}>{children}</main>
+          <main key={pathname}>{children}</main>
         </AnimatePresence>
         <ToastContainer />
       </div>

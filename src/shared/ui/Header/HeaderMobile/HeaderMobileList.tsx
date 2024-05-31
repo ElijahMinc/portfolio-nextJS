@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { HeaderMobileItem } from './HeaderMobileItem';
 
 interface HeaderMobileListProps {
@@ -10,8 +10,7 @@ export const HeaderMobileList = ({
   navigationData,
   onClickItem,
 }: HeaderMobileListProps) => {
-  const router = useRouter();
-  const currentPathName = router.pathname;
+  const currentPathName = usePathname();
   return (
     <ul className="h-full flex flex-col justify-center items-center gap-y-8 text-primary font-bold text-3xl font-primary">
       {navigationData.length &&

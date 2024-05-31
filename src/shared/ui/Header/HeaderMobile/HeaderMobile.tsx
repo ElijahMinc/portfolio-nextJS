@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, Children } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { CgMenuRight } from 'react-icons/cg';

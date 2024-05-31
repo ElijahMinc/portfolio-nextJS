@@ -1,6 +1,8 @@
+'use client';
+
 import React, { useState, useEffect, createContext } from 'react';
 import { useTheme } from '@/shared/hooks';
-import { motion } from 'framer-motion';
+import { motion } from '@shared/lib/animation';
 import cn from 'classnames';
 
 export const CursorContext = createContext();

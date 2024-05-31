@@ -1,3 +1,5 @@
+'use client';
+import { useCursor } from '@/shared/hooks';
 import Image from 'next/image';
 import NextLink, { LinkProps } from 'next/link';
 import { HTMLProps } from 'react';
@@ -11,6 +13,8 @@ export const Logo = ({
   href,
   ...props
 }: LogoProps & LinkProps & HTMLProps<HTMLAnchorElement>) => {
+  const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
+
   return logoUrl ? (
     <NextLink href={href}>
       <a {...props}>

@@ -1,4 +1,6 @@
-import { motion } from 'framer-motion';
+'use client';
+
+import { motion } from '@shared/lib/animation';
 import Link from 'next/link';
 import { useCursor, useTextAnimation, useTheme } from '@/shared/hooks';
 import { transition1 } from '@/shared/constants/transitions';

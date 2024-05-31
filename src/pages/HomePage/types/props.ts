@@ -4,5 +4,5 @@ import { EntrySkeletonType } from 'contentful';
 export interface HomePageProps extends Record<string, unknown> {
   homePage: EntrySkeletonType<IHomePageFields>;
 
-  headerContent: EntrySkeletonType<IHeaderFields>;
+  headerContent?: EntrySkeletonType<IHeaderFields>;
 }
