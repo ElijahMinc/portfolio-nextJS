@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion';
 import { transition1 } from '@/shared/constants/transitions';
-import { useCursor } from '@/shared/hooks';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { useState } from 'react';
-import { withParticles } from '@/shared/hoc/withParticles';
 import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
 import { PortfolioPageProps } from '../types/props';
 import Image from 'next/image';
+import { useCursor } from '@/entities/Cursor';
+import { withParticles } from '@/entities/Particles';
 
 const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
   const title = portfolioPage.fields?.title || null;

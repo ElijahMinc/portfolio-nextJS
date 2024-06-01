@@ -2,7 +2,7 @@ import { MdOutlineDarkMode } from 'react-icons/md';
 import { CiSun } from 'react-icons/ci';
 import { DetailedHTMLProps, ParamHTMLAttributes } from 'react';
 import cn from 'classnames';
-import { THEMES } from '@/shared/constants/themes';
+import { THEMES } from '../config/ThemeContext';
 
 interface ThemeProps
   extends DetailedHTMLProps<

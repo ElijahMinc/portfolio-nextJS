@@ -1,12 +1,10 @@
 import type { AppProps } from 'next/app';
 import { IHeaderFields } from '@/shared/types/contentful';
 import { EntrySkeletonType } from 'contentful';
-import { ProgressLayout } from '@/widgets/ProgressLayout';
-import { CursorProvider } from '@/shared/lib/context/CursorContext';
-import { ThemeProvider } from '@/shared/lib/context/ThemeContext';
-import { AppLayout, Header, Seo } from '@/widgets';
-import { SeoProps } from '@/shared/types/seo.type';
+import { BaseSeoProps, SeoProps } from '@/shared/types/seo.type';
 import { Locales } from '@/shared/constants/locales';
+
+import { App } from '@/app/App';
 
 import 'nprogress/nprogress.css'; //styles of nprogress
 import '@shared/styles/globals.css';
@@ -24,26 +22,25 @@ export default function Application({
   const seoDescription = seo?.description;
   const seoPreviewImage = seo?.previewImage?.fields?.file?.url;
 
+  const headerConfiguration = {
+    logoUrl,
+    socials,
+  };
+
+  const seoConfiguration: BaseSeoProps = {
+    title: seoTitle,
+    description: seoDescription,
+    previewImage: seoPreviewImage,
+    isIndexablePage: true,
+    locale: Locales.EN,
+  };
+
   return (
-    <ProgressLayout>
-      <CursorProvider>
-        <ThemeProvider>
-          <AppLayout
-            Seo={
-              <Seo
-                title={seoTitle}
-                description={seoDescription}
-                previewImage={seoPreviewImage}
-                locale={Locales.EN}
-                isIndexablePage
-              />
-            }
-            Header={<Header logoUrl={logoUrl} socials={socials || []} />}
-          >
-            <Component {...pageProps} />
-          </AppLayout>
-        </ThemeProvider>
-      </CursorProvider>
-    </ProgressLayout>
+    <App
+      seoConfiguration={seoConfiguration}
+      headerConfiguration={headerConfiguration}
+    >
+      <Component {...pageProps} />
+    </App>
   );
 }

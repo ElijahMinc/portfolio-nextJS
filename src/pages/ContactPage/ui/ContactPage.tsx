@@ -1,12 +1,13 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { transition1 } from '@/shared/constants/transitions';
-import { useCursor, useTextAnimation } from '@/shared/hooks';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { SendContactForm } from '@/features';
-import { withParticles } from '@/shared/hoc/withParticles';
 import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
 import { ContactPageProps } from '../types/props';
+import { useCursor } from '@/entities/Cursor';
+import { useTextAnimation } from '@/shared/hooks';
+import { withParticles } from '@/entities/Particles';
 
 const Contact = ({ contactPage }: ContactPageProps) => {
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();

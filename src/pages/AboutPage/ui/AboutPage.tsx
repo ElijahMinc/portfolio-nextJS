@@ -2,13 +2,14 @@ import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { transition1 } from '@/shared/constants/transitions';
-import { useCursor, useTextAnimation } from '@/shared/hooks';
 import { ROUTES } from '@/shared/constants/routes';
-import { withParticles } from '@/shared/hoc/withParticles';
 import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
 import { AboutPageProps } from '../types/props';
 import Image from 'next/image';
 import { imageQuality } from '@/shared/constants/images';
+import { useCursor } from '@/entities/Cursor';
+import { useTextAnimation } from '@/shared/hooks';
+import { withParticles } from '@/entities/Particles';
 
 const About = ({ aboutPage }: AboutPageProps) => {
   const titleRef = useRef(null);

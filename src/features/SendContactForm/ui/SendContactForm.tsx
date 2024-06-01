@@ -1,4 +1,4 @@
-import { ContactForm, postContactForm } from '@/entities';
+import { ContactForm } from '@/entities';
 import {
   errorNotification,
   successNotification,
@@ -6,6 +6,7 @@ import {
 import React, { useState } from 'react';
 import ReactConfetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
+import { postContactForm } from '../api/postContactForm';
 
 export const SendContactForm = () => {
   const { width, height } = useWindowSize();

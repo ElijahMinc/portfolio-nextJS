@@ -9,9 +9,9 @@ import {
   headerNavigationList,
 } from '@shared/constants/headerNavigationList';
 import { Socials } from '@shared/ui';
-import { useCursor } from '@/shared/hooks';
 import { Logo } from '@/shared/ui/Logo';
 import { ROUTES } from '@/shared/constants/routes';
+import { useCursor } from '@/entities/Cursor/lib/useCursor';
 
 export const Header = ({
   logoUrl,
@@ -46,7 +46,11 @@ export const Header = ({
         />
       }
     >
-      <HeaderNavigationList data={headerNavigationList} />
+      <HeaderNavigationList
+        data={headerNavigationList}
+        onMouseEnter={mouseEnterHandle}
+        onMouseLeave={mouseLeaveHandle}
+      />
     </HeaderWrapper>
   );
 };

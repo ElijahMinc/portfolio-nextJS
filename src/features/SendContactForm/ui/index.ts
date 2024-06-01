@@ -1,1 +1,0 @@
-export { SendContactForm } from './ui';

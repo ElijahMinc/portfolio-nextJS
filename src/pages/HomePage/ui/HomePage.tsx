@@ -1,17 +1,19 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useCursor, useTextAnimation, useTheme } from '@/shared/hooks';
 import { transition1 } from '@/shared/constants/transitions';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { useRef } from 'react';
 import { ImFilePdf } from 'react-icons/im';
 import { ROUTES } from '@/shared/constants/routes';
-import { withParticles } from '@/shared/hoc/withParticles';
 import { AssetFile } from 'contentful';
 import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
 import { HomePageProps } from '../types/props';
 import Image from 'next/image';
 import { imageQuality } from '@/shared/constants/images';
+import { useCursor } from '@/entities/Cursor';
+import { useTheme } from '@/entities/Theme/lib/useTheme';
+import { useTextAnimation } from '@/shared/hooks';
+import { withParticles } from '@/entities/Particles';
 
 const HomePage = ({ homePage }: HomePageProps) => {
   const { theme } = useTheme();

@@ -3,13 +3,13 @@ import { useCallback } from 'react';
 import Particles from 'react-particles';
 import { loadSlim } from 'tsparticles-slim';
 import type { Engine, RecursivePartial, IOptions } from 'tsparticles-engine';
-import { useTheme } from '../hooks';
-import { THEMES } from '../constants/themes';
-import { defaultParticleOptions } from '../constants/defaultParticlesOptions';
 import { EntrySkeletonType } from 'contentful';
-import { IHeaderFields } from '../types/contentful';
+import { useTheme } from '@/entities/Theme/lib/useTheme';
+import { THEMES } from '@/entities/Theme/config/ThemeContext';
+import { defaultParticleOptions } from '../constants/defaultParticlesOptions';
+import { IHeaderFields } from '@/shared/types/contentful';
 
-export const ParticlesLayout = ({
+const ParticlesLayout = ({
   children,
 }: React.PropsWithChildren): JSX.Element => {
   const [options, setOptions] = useState<RecursivePartial<IOptions>>(

@@ -1,5 +1,6 @@
+import { useCursor } from '@/entities/Cursor';
 import { Theme } from '@/entities/Theme';
-import { useCursor, useTheme } from '@/shared/hooks';
+import { useTheme } from '@/entities/Theme/lib/useTheme';
 import { DetailedHTMLProps, ParamHTMLAttributes } from 'react';
 
 interface ThemeSwitcherProps

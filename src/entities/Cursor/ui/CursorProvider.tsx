@@ -1,17 +1,17 @@
-import React, { useState, useEffect, createContext } from 'react';
-import { useTheme } from '@/shared/hooks';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { Variants, motion } from 'framer-motion';
 import cn from 'classnames';
+import { useTheme } from '@/entities/Theme/lib/useTheme';
+import { THEMES } from '@/entities/Theme/config/ThemeContext';
+import { CursorContext, ICursorBg } from '../config/CursorContext';
 
-export const CursorContext = createContext();
-
-export const CursorProvider = ({ children }) => {
+export const CursorProvider = ({ children }: React.PropsWithChildren) => {
+  const { theme } = useTheme();
   const [cursorPos, setCursorPos] = useState({
     x: 0,
     y: 0,
   });
-  const { theme } = useTheme();
-  const [cursorBg, setCursorBg] = useState('default');
+  const [cursorBg, setCursorBg] = useState<ICursorBg>('default');
 
   useEffect(() => {
     const mobileViewportIsActive = window.innerWidth < 768;
@@ -22,7 +22,7 @@ export const CursorProvider = ({ children }) => {
       return;
     }
 
-    const move = (e) =>
+    const move = (e: any) =>
       setCursorPos({
         x: e.clientX,
         y: e.clientY,
@@ -35,13 +35,13 @@ export const CursorProvider = ({ children }) => {
     };
   }, []);
 
-  const cursorVariants = {
+  const cursorVariants: Variants = {
     default: {
       width: '50px',
       height: '50px',
       x: cursorPos.x - 25,
       y: cursorPos.y - 25,
-      backgroundColor: theme === 'dark' ? '#fff' : '#000',
+      backgroundColor: theme === THEMES.DARK ? '#fff' : '#000',
       mixBlendMode: 'normal',
       transition: {
         ease: 'linear',
