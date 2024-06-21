@@ -21,6 +21,7 @@ import {
 
 import cn from 'classnames';
 import './home-page.styles.css';
+import { transition1 } from '@/shared/constants/transitions';
 
 const HomePage = ({ homePage }: HomePageProps) => {
   const { theme } = useTheme();
@@ -44,7 +45,11 @@ const HomePage = ({ homePage }: HomePageProps) => {
 
   return (
     <motion.section
-      {...motionSectionAnimationConfig}
+      // {...motionSectionAnimationConfig}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={transition1}
       className="homepage section"
     >
       <div className="homepage__container">
@@ -95,13 +100,21 @@ const HomePage = ({ homePage }: HomePageProps) => {
               })}
             >
               <motion.div
-                {...motionImageWrapperAnimationConfig}
+                // {...motionImageWrapperAnimationConfig}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={transition1}
                 onMouseEnter={mouseEnterHandle}
                 onMouseLeave={mouseLeaveHandle}
                 className="homepage__image-wrapper"
               >
                 <motion.div
-                  {...motionImageContainerAnimationConfig}
+                  // {...motionImageContainerAnimationConfig}
+                  whileHover={{
+                    scale: 1.1,
+                  }}
+                  transition={transition1}
                   className="homepage__image-container"
                 >
                   <Image
