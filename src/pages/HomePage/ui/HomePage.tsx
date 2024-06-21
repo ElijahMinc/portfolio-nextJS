@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { transition1 } from '@/shared/constants/transitions';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { useRef } from 'react';
 import { ImFilePdf } from 'react-icons/im';
@@ -14,6 +13,15 @@ import { useCursor } from '@/entities/Cursor';
 import { useTheme } from '@/entities/Theme/lib/useTheme';
 import { useTextAnimation } from '@/shared/hooks';
 import { withParticles } from '@/entities/Particles';
+import {
+  motionImageContainerAnimationConfig,
+  motionImageWrapperAnimationConfig,
+  motionSectionAnimationConfig,
+} from '../config/motion-animation';
+import { transition1 } from '@/shared/constants/transitions';
+
+import cn from 'classnames';
+import './home-page.styles.css';
 
 const HomePage = ({ homePage }: HomePageProps) => {
   const { theme } = useTheme();
@@ -37,31 +45,26 @@ const HomePage = ({ homePage }: HomePageProps) => {
 
   return (
     <motion.section
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      {...motionSectionAnimationConfig}
       transition={transition1}
-      className="section lg:overflow-y-scroll lg:overflow-x-hidden "
+      className="homepage section"
     >
-      <div className="container mx-auto h-full relative ">
-        <div className="flex flex-col justify-center lg:pt-[80px] pt-[100px]">
+      <div className="homepage__container">
+        <div className="homepage__content">
           <div
             onMouseEnter={mouseEnterHandle}
             onMouseLeave={mouseLeaveHandle}
-            className="w-full lg:max-w-[70%] lg:w-[70%] pt-36 pb-14 lg:pt-0 lg:pb-0 lg:absolute flex flex-col justify-center items-center lg:items-center lg:basis-1/2 relative z-20"
+            className="homepage__body"
           >
             {title && (
-              <h1
-                className="h1 text-center max-w-72 lg:max-w-none mb-10 lg:mb-12 "
-                ref={titleRef}
-              >
+              <h1 className="homepage__title h1" ref={titleRef}>
                 {title}
               </h1>
             )}
 
             {subtitle && (
               <div
-                className="text-[26px] lg:text-[36px] font-primary mb-10 lg:mb-12 flex flex-col gap-2 text-white "
+                className="homepage__subtitle h1"
                 dangerouslySetInnerHTML={{ __html: subtitle }}
               />
             )}
@@ -70,7 +73,7 @@ const HomePage = ({ homePage }: HomePageProps) => {
               {buttonText && (
                 <Link
                   href={ROUTES.CONTACT}
-                  className="btn-fancy flex justify-center items-center mb-[30px]"
+                  className={cn('homepage__button-contact', 'btn-fancy')}
                 >
                   {buttonText}
                 </Link>
@@ -78,7 +81,7 @@ const HomePage = ({ homePage }: HomePageProps) => {
             </div>
             {CV && (
               <a
-                className="btn-fancy flex justify-center items-center gap-1 "
+                className={cn('homepage__button-cv', 'btn-fancy')}
                 href={CV.url}
                 target="_blank"
               >
@@ -88,23 +91,21 @@ const HomePage = ({ homePage }: HomePageProps) => {
           </div>
           {personUrl && (
             <div
-              className={`hidden justify-end lg:max-h-full lg:static lg:blur-none absolute top-0 left-0 w-full h-full blur-[1px] pointer-events-none lg:pointer-events-auto overflow-hidden lg:flex  ${
-                theme === 'light' ? 'hidden' : 'flex'
-              }`}
+              className={cn('homepage__personal-url ', {
+                hidden: theme === 'light',
+                flex: theme !== 'light',
+              })}
             >
               <motion.div
+                {...motionImageWrapperAnimationConfig}
                 onMouseEnter={mouseEnterHandle}
                 onMouseLeave={mouseLeaveHandle}
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                exit={{ scale: 0 }}
-                transition={transition1}
-                className="relative right-0 w-[700px] h-[700px] z-30"
+                className="homepage__image-wrapper"
               >
                 <motion.div
-                  whileHover={{ scale: 1.1 }}
+                  {...motionImageContainerAnimationConfig}
                   transition={transition1}
-                  className="absolute lg:top-0 lg:left-0 top-[-30px] left-[50px] w-[95%] h-[95%] z-10 "
+                  className="homepage__image-container"
                 >
                   <Image
                     quality={imageQuality}
