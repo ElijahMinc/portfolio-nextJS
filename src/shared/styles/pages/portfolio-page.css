@@ -1,0 +1,51 @@
+.porfolio-page {
+  @apply dark:bg-black overflow-y-scroll lg:pt-[80px];
+}
+
+.porfolio-page__container {
+  @apply container mx-auto relative pr-1 pl-1;
+}
+
+.porfolio-page__body {
+  @apply flex flex-col lg:flex-row h-full items-center justify-center gap-x-24 text-center lg:text-left pt-24 lg:pt-36 pb-8;
+}
+
+.porfolio-page__title-wrapper {
+  @apply flex flex-col lg:items-start  lg:flex-[0_0_40%]  lg:w-[40%] relative z-10;
+}
+
+.porfolio-page__description {
+  @apply mb-12 max-w-sm dark:text-white text-black;
+}
+
+.porfolio-page__link {
+  @apply mb-[30px] mr-auto lg:mr-0 w-full lg:w-[250px];
+}
+
+.porfolio-page__preview-wrapper {
+  @apply grid lg:grid-cols-2 gap-2 lg:flex-[0_1_60%] relative z-10;
+}
+
+.porfolio-page__preview-element {
+  @apply w-[300px] lg:max-w-full h-[220px] lg:h-[220px] bg-accent overflow-hidden;
+}
+
+.porfolio-page__image-wrapper {
+  @apply relative  lg:w-full h-[220px] lg:h-[220px] hover:scale-95 transition-all duration-500 cursor-pointer;
+}
+
+.porfolio-page__image {
+  @apply object-cover;
+}
+
+.porfolio-page__videos {
+  @apply block lg:grid grid-cols-2 lg:gap-4 pb-6;
+}
+
+.porfolio-page__videos-wrapper {
+  @apply mb-5 lg:mb-0;
+}
+
+.porfolio-page__videos-title {
+  @apply text-[26px] lg:text-[36px] font-primary mb-2 lg:mb-4;
+}

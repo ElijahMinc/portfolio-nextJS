@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { transition1 } from '@/shared/constants/transitions';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { useState } from 'react';
@@ -8,6 +7,13 @@ import { PortfolioPageProps } from '../types/props';
 import Image from 'next/image';
 import { useCursor } from '@/entities/Cursor';
 import { withParticles } from '@/entities/Particles';
+
+import cn from 'classnames';
+import {
+  motionPreviewWorkAnimationConfig,
+  motionSectionAnimationConfig,
+  motionTitleWrapperAnimationConfig,
+} from '../config/motion-animation';
 
 const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
   const title = portfolioPage.fields?.title || null;
@@ -38,28 +44,22 @@ const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
 
   return (
     <motion.section
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={transition1}
-      className="section dark:bg-black overflow-y-scroll lg:pt-[80px]"
+      {...motionSectionAnimationConfig}
+      className="section porfolio-page"
     >
-      <div className="container mx-auto relative pr-1 pl-1">
-        <div className="flex flex-col lg:flex-row h-full items-center justify-center gap-x-24 text-center lg:text-left pt-24 lg:pt-36 pb-8">
+      <div className="porfolio-page__container">
+        <div className="porfolio-page__body">
           <motion.div
             key={currentWork?.title}
-            initial={{ opacity: 0, x: '-50%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '-50%' }}
-            transition={transition1}
+            {...motionTitleWrapperAnimationConfig}
             onMouseEnter={mouseEnterHandle}
             onMouseLeave={mouseLeaveHandle}
-            className="flex flex-col lg:items-start  lg:flex-[0_0_40%]  lg:w-[40%] relative z-10"
+            className="porfolio-page__title-wrapper"
           >
             {currentWork?.title && <h1 className="h1">{currentWork.title}</h1>}
             {currentWork?.description && (
               <div
-                className="mb-12 max-w-sm dark:text-white text-black"
+                className="porfolio-page__description"
                 dangerouslySetInnerHTML={{
                   __html: currentWork.description,
                 }}
@@ -67,7 +67,7 @@ const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
             )}
             {!!currentWork.link && (
               <a
-                className="btn-fancy  mb-[30px] mr-auto lg:mr-0 w-full lg:w-[250px]"
+                className="btn-fancy porfolio-page__link"
                 href={currentWork.link}
                 target="_blank"
               >
@@ -79,13 +79,10 @@ const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
 
           {!!previewPortfolioWorks?.length && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={transition1}
+              {...motionPreviewWorkAnimationConfig}
               onMouseEnter={mouseEnterHandle}
               onMouseLeave={setCursorDefault}
-              className="grid lg:grid-cols-2 gap-2 lg:flex-[0_1_60%] relative z-10"
+              className="porfolio-page__preview-wrapper"
             >
               {previewPortfolioWorks.map((portfolioWork, idx) => {
                 const titleOfCurrentPortfolioWork = portfolioWork?.fields
@@ -108,7 +105,7 @@ const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
                 return (
                   <div
                     key={idx}
-                    className="w-[300px] lg:max-w-full h-[220px] lg:h-[220px] bg-accent overflow-hidden"
+                    className="porfolio-page__preview-element"
                     onClick={() => {
                       if (!portfolioPage) return;
                       if (!portfolioWork?.fields?.title) return;
@@ -127,11 +124,11 @@ const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
                       });
                     }}
                   >
-                    <div className="relative  lg:w-full h-[220px] lg:h-[220px] hover:scale-95 transition-all duration-500 cursor-pointer">
+                    <div className="porfolio-page__image-wrapper">
                       <Image
-                        className={`object-cover 
-                          ${isChoosenLink ? 'scale-75' : ''}
-                          `}
+                        className={cn(`object-cover`, {
+                          'scale-75': isChoosenLink,
+                        })}
                         fill
                         src={`https:${linkOfCurrentPortfolioWork}`}
                         alt={seoDescription}
@@ -145,13 +142,13 @@ const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
         </div>
 
         {!!videos && (
-          <div className="block lg:grid grid-cols-2 lg:gap-4 pb-6">
+          <div className="porfolio-page__videos">
             {videos.map((item, idx) => (
               <div key={idx} className="mb-5 lg:mb-0">
                 <div
                   onMouseEnter={mouseEnterHandle}
                   onMouseLeave={mouseLeaveHandle}
-                  className="text-[26px] lg:text-[36px] font-primary mb-2 lg:mb-4"
+                  className="porfolio-page__videos-title"
                   dangerouslySetInnerHTML={{
                     __html: documentToHtmlString(item.fields?.videoTitle),
                   }}

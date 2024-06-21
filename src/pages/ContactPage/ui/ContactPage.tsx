@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { transition1 } from '@/shared/constants/transitions';
 import { BLOCKS } from '@contentful/rich-text-types';
 import { SendContactForm } from '@/features';
 import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
@@ -8,6 +7,12 @@ import { ContactPageProps } from '../types/props';
 import { useCursor } from '@/entities/Cursor';
 import { useTextAnimation } from '@/shared/hooks';
 import { withParticles } from '@/entities/Particles';
+import {
+  motionImageAnimationConfig,
+  motionSectionAnimationConfig,
+} from '../config/motion-animation';
+
+import cn from 'classnames';
 
 const Contact = ({ contactPage }: ContactPageProps) => {
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
@@ -27,46 +32,42 @@ const Contact = ({ contactPage }: ContactPageProps) => {
 
   return (
     <motion.section
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={transition1}
-      className="section overflow-y-scroll pt-[100px] pb-[100px]"
+      {...motionSectionAnimationConfig}
+      className="contact-page section"
     >
-      <div className="container mx-auto">
+      <div className="contact-page__container">
         <div
-          className={`flex flex-col lg:flex-row h-full items-center  gap-x-8 text-center lg:text-left overflow-hidden; ${
-            personImg ? 'justify-start' : 'justify-center'
-          }`}
+          className={cn('contact-page__body', {
+            ['justify-start']: !!personImg,
+            ['justify-center']: !personImg,
+          })}
         >
-          <div className="hidden lg:flex bg-[#eef7f959] absolute bottom-0 left-0 right-0 top-72 pointer-events-none " />
+          <div className="contact-page__cover" />
 
           {/* text & form */}
           <div
             onMouseEnter={mouseEnterHandle}
             onMouseLeave={mouseLeaveHandle}
-            className={`lg:flex-${
-              personImg ? '[1_1_0]' : '[0_1_50%]'
-            }   lg:pt-32 px-1 lg:px-4 z-20`}
+            className={cn('contact-page__form-wrapper', {
+              'lg:flex-[1_1_0]': !!personImg,
+              'lg:flex-[0_1_50%]': !personImg,
+            })}
           >
             <h1 className="h1" ref={titleRef}>
               {title}
             </h1>
 
-            <p className="mb-12 dark:text-white text-black">{subtitle}</p>
+            <p className="contact-page__p">{subtitle}</p>
 
             <SendContactForm />
           </div>
 
           {personImg && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              {...motionImageAnimationConfig}
               onMouseEnter={mouseEnterHandle}
               onMouseLeave={mouseLeaveHandle}
-              transition={transition1}
-              className="lg:flex-1 z-10"
+              className="contact-page__img"
             >
               <img src={personImg as string} alt="Person Img" />
             </motion.div>
