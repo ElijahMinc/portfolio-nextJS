@@ -1,0 +1,5 @@
+@layer components {
+  .h1 {
+    @apply text-[40px] lg:text-[90px] font-primary font-bold leading-[120%] tracking-[-0.05em] mb-2 text-black dark:text-white;
+  }
+}

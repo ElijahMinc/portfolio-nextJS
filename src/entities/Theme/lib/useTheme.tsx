@@ -7,7 +7,7 @@ import {
 
 interface UseThemeResults {
   /** Current theme. */
-  readonly theme?: THEMES;
+  readonly theme: THEMES;
   /** Function to switch theme. */
   readonly toggleTheme: () => void;
 }

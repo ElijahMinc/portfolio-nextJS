@@ -67,7 +67,7 @@ const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
             )}
             {!!currentWork.link && (
               <a
-                className="btn mb-[30px] mr-auto lg:mr-0 w-full lg:w-auto"
+                className="btn-fancy  mb-[30px] mr-auto lg:mr-0 w-full lg:w-[250px]"
                 href={currentWork.link}
                 target="_blank"
               >

@@ -1,0 +1,28 @@
+.span-animation {
+  position: relative;
+  top: 150px;
+  left: 20px;
+  opacity: 0;
+  visibility: hidden;
+
+  transition: 0.3s;
+  /* transition-delay: 0.1; */
+}
+
+.span-animation.animate {
+  top: 0;
+  left: 0;
+  opacity: 1;
+  visibility: visible;
+}
+
+.show {
+  opacity: 1;
+  visibility: visible;
+  transition: 0.7s;
+}
+
+.hide {
+  opacity: 0;
+  visibility: hidden;
+}

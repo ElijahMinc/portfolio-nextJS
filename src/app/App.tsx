@@ -1,5 +1,4 @@
-import { ProgressLayout } from '@/widgets/ProgressLayout';
-import { AppLayout } from './layout';
+import { AppLayout, ProgressLayout } from './layout';
 import { Header, Seo } from '@/widgets';
 import { BaseSeoProps } from '@/shared/types/seo.type';
 import { HeaderNavigationListData } from '@/shared/constants/headerNavigationList';

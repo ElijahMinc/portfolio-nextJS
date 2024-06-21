@@ -37,7 +37,7 @@ export const HeaderMobile = ({
       >
         <div
           onClick={handleClose}
-          className="cursor-pointer text-4xl absolute z-30 left-4 top-14 text-primary "
+          className="cursor-pointer text-4xl absolute z-30 right-4 top-14 text-primary "
         >
           <IoMdClose />
         </div>

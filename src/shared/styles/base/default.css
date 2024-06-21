@@ -1,0 +1,14 @@
+@layer base {
+  body {
+    @apply overflow-hidden text-primary font-secondary bg-blue-50;
+  }
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.contact-input::placeholder {
+  color: var(--white-color);
+}

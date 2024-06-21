@@ -10,6 +10,10 @@ import { imageQuality } from '@/shared/constants/images';
 import { useCursor } from '@/entities/Cursor';
 import { useTextAnimation } from '@/shared/hooks';
 import { withParticles } from '@/entities/Particles';
+import { motionImageWrapperAnimationConfig } from '../config/motion-animation';
+
+import cn from 'classnames';
+import './about-page.styles.css';
 
 const About = ({ aboutPage }: AboutPageProps) => {
   const titleRef = useRef(null);
@@ -30,23 +34,21 @@ const About = ({ aboutPage }: AboutPageProps) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={transition1}
-      className="section overflow-y-scroll lg:pt-[150px] pt-0 "
+      className="aboutpage section"
     >
-      <div className="dark:bg-black bg-white absolute top-0 left-0 w-full h-full pointer-events-none opacity-50 block lg:hidden z-10" />
+      <div className="aboutpage__cover" />
 
-      <div className="container mx-auto relative ">
+      <div className="aboutpage__container">
         {/* text and img wrapepr */}
 
-        <div className="flex flex-col lg:flex-row h-full items-center justify-center gap-x-24 text-center lg:text-left lg:pt-16 ">
+        <div className="aboutpage__body">
           {personImg && (
             <motion.div
-              initial={{ opacity: 0, x: '-50%' }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: '-50%' }}
+              {...motionImageWrapperAnimationConfig}
               onMouseEnter={mouseEnterHandle}
               onMouseLeave={mouseLeaveHandle}
               transition={transition1}
-              className="absolute flex-1 max-h-96 lg:max-h-full order-2 lg:order-none overflow-hidden lg:relative lg:blur-none top-0  left-50% lg:left-0 w-[500px] h-[500px] blur-sm pointer-events-none lg:pointer-events-auto"
+              className="aboutpage__image-wrapper"
             >
               <Image
                 quality={imageQuality}
@@ -62,7 +64,7 @@ const About = ({ aboutPage }: AboutPageProps) => {
           <div
             onMouseEnter={mouseEnterHandle}
             onMouseLeave={mouseLeaveHandle}
-            className="flex-1 pt-36 pb-14 lg:pt-0 lg:w-auto z-10 flex flex-col justify-center items-center lg:items-start"
+            className="aboutpage__content"
           >
             {title && (
               <h1 className="h1" ref={titleRef}>
@@ -72,13 +74,13 @@ const About = ({ aboutPage }: AboutPageProps) => {
 
             {subtitle && (
               <div
-                className="mb-12 max-w-sm flex flex-col gap-2 dark:text-white text-black"
+                className="aboutpage__subtitle"
                 dangerouslySetInnerHTML={{ __html: subtitle }}
               />
             )}
 
             <Link
-              className="btn mb-[30px] hover:rounded-tr-lg hover:rounded-bl-lg hover:tracking-widest"
+              className={cn('aboutpage__btn', 'btn-fancy')}
               href={ROUTES.PORTFOLIO}
             >
               View my work

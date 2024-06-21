@@ -35,7 +35,7 @@ const Contact = ({ contactPage }: ContactPageProps) => {
     >
       <div className="container mx-auto">
         <div
-          className={`flex flex-col lg:flex-row h-full items-center  gap-x-8 text-center lg:text-left overflow-x-hidden ${
+          className={`flex flex-col lg:flex-row h-full items-center  gap-x-8 text-center lg:text-left overflow-hidden; ${
             personImg ? 'justify-start' : 'justify-center'
           }`}
         >

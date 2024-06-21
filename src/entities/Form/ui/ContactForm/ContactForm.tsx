@@ -101,7 +101,8 @@ export const ContactForm = ({
       <Button
         type="submit"
         disabled={isLoading}
-        className="btn mt-[30px] mx-auto lg:max-0 self-start hover:rounded-bl-lg hover:tracking-widest disabled:bg-white:pointer-events-none"
+        appearence="fancy"
+        className="mt-[30px] mx-auto lg:max-0 self-start hover:rounded-bl-lg hover:tracking-widest disabled:bg-white:pointer-events-none"
       >
         {submitText}
         {isLoading && <Spinner size="sm" />}

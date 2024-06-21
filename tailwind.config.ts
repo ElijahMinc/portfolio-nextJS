@@ -5,10 +5,15 @@ const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     fontFamily: {
-      primary: 'Playfair Display',
-      secondary: 'Mulish',
+      primary: 'var(--primary-font)',
+      secondary: 'var(--secondary-font)',
+      third: 'var(--third-font)',
     },
     screens: {
+      // sm: 'var(--sm-screen)',
+      // md: 'var(--md-screen)',
+      // lg: 'var(--lg-screen)',
+      // xl: 'var(--xl-screen)',
       sm: '640px',
       md: '768px',
       lg: '1024px',
@@ -16,12 +21,12 @@ const config: Config = {
     },
     extend: {
       colors: {
-        primary: 'rgba(147, 197, 253, 0.9)',
-        black: 'rgba(0,0,0,0.9)',
-        grey: '#484B4B',
-        white: '#fff',
-        accent: '#EEF7F9',
-        error: '#9a4141',
+        primary: 'var(--primary-color)',
+        black: 'var(--black-color)',
+        grey: 'var(--white-color)',
+        white: 'var(--accent-color)',
+        accent: 'var(--accent-color)',
+        error: 'var(--error-color)',
       },
     },
   },

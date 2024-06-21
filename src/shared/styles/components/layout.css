@@ -1,0 +1,5 @@
+@layer components {
+  .section {
+    @apply h-screen w-screen dark:bg-black bg-blue-50 px-1;
+  }
+}
