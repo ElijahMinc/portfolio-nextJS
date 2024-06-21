@@ -11,6 +11,9 @@
 @import './components/layout.css';
 @import './components/typography.css';
 
+/* pages */
+@import './pages/home-page.css';
+
 /* utilities */
 @import 'tailwindcss/utilities';
 @import './utilities/scrollbar.css';
