@@ -13,6 +13,7 @@
 
 /* pages */
 @import './pages/home-page.css';
+@import './pages/about-page.css';
 
 /* utilities */
 @import 'tailwindcss/utilities';
