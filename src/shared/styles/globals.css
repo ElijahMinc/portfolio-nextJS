@@ -28,8 +28,10 @@
   /* colors */
   --primary-color: rgba(147, 197, 253, 0.9);
   --black-color: rgba(0, 0, 0, 0.9);
+  --black-color-30: rgba(0, 0, 0, 0.3);
   --grey-color: #484b4b;
-  --white-color: #fff;
+  --white-color: rgba(245, 246, 248);
+  --white-color-30: rgba(245, 246, 248, 0.3);
   --accent-color: #eef7f9;
   --error-color: #9a4141;
 

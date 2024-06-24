@@ -108,15 +108,18 @@
 }
 
 .loader {
-  --primary-color: rgb(147 197 253 / var(--tw-bg-opacity));
-
   transform: rotateZ(45deg);
   perspective: 1000px;
   border-radius: 50%;
   width: 48px;
   height: 48px;
-  color: #fff;
+  color: var(--white-color);
 }
+
+html.dark .loader {
+  color: var(--primary-color);
+}
+
 .loader:before,
 .loader:after {
   content: '';
@@ -131,7 +134,7 @@
   animation: 1s spin linear infinite;
 }
 .loader:after {
-  color: var(--primary-color);
+  color: var(--error-color);
   transform: rotateY(70deg);
   animation-delay: 0.4s;
 }

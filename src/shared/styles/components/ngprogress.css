@@ -3,7 +3,7 @@
 }
 
 #nprogress {
-  --primary-color: rgb(147 197 253 / var(--tw-bg-opacity));
+  --primary-color: var(--error-color);
 
   pointer-events: none;
 }
