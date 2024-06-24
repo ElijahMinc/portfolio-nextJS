@@ -14,6 +14,12 @@ import {
   motionSectionAnimationConfig,
   motionTitleWrapperAnimationConfig,
 } from '../config/motion-animation';
+import {
+  ICurrentWork,
+  IPreviewWorkLinks,
+  PreviewPortfolioWorksList,
+} from '@/entities/PreviewPortfolioWorks/ui/PreviewPortfolioWorksList';
+import { getMappedCurrentWork } from '@/entities/PreviewPortfolioWorks/utils/mappedCurrentWork';
 
 const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
   const title = portfolioPage.fields?.title || null;
@@ -41,6 +47,11 @@ const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
   const previewPortfolioWorks = portfolioPage?.fields?.images || [];
 
   const videos = (videosContent?.items || []) as any[];
+
+  const workLinks = (portfolioPage?.fields?.workLinks ?? []) as string[];
+
+  const handleChangeCurrentWork = (currentWork: ICurrentWork) =>
+    setCurrentWork(currentWork);
 
   return (
     <motion.section
@@ -84,59 +95,12 @@ const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
               onMouseLeave={setCursorDefault}
               className="porfolio-page__preview-wrapper"
             >
-              {previewPortfolioWorks.map((portfolioWork, idx) => {
-                const titleOfCurrentPortfolioWork = portfolioWork?.fields
-                  ?.title as string;
-
-                const descriptionOfCurrentPortfolioWork = portfolioWork?.fields
-                  ?.description as string;
-
-                const linkOfCurrentPortfolioWork = portfolioWork?.fields?.file
-                  ?.url as string;
-
-                const isChoosenLink =
-                  titleOfCurrentPortfolioWork?.toLowerCase() ===
-                  currentWork?.title?.toLowerCase();
-
-                const seoDescription =
-                  titleOfCurrentPortfolioWork +
-                  descriptionOfCurrentPortfolioWork;
-
-                return (
-                  <div
-                    key={idx}
-                    className="porfolio-page__preview-element"
-                    onClick={() => {
-                      if (!portfolioPage) return;
-                      if (!portfolioWork?.fields?.title) return;
-
-                      const work =
-                        portfolioPage.fields?.workLinks?.[
-                          portfolioWork?.fields?.title as string
-                        ];
-
-                      if (!work) return;
-
-                      setCurrentWork({
-                        title: work.title,
-                        description: work.description,
-                        link: work.link,
-                      });
-                    }}
-                  >
-                    <div className="porfolio-page__image-wrapper">
-                      <Image
-                        className={cn(`object-cover`, {
-                          'scale-75': isChoosenLink,
-                        })}
-                        fill
-                        src={`https:${linkOfCurrentPortfolioWork}`}
-                        alt={seoDescription}
-                      />
-                    </div>
-                  </div>
-                );
-              })}
+              <PreviewPortfolioWorksList
+                currentWork={getMappedCurrentWork(currentWork)}
+                workLinks={workLinks}
+                handleChangeCurrentWork={handleChangeCurrentWork}
+                works={previewPortfolioWorks as any[]}
+              />
             </motion.div>
           )}
         </div>

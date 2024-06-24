@@ -1,0 +1,44 @@
+.link {
+  --text: var(--white-color);
+  --line: #b84165c2;
+  --line-active: #b84165c2;
+
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  color: var(--text);
+  margin: 0 var(--spacing, 0px);
+  transition: margin 0.25s;
+}
+
+.link svg {
+  width: 76px;
+  height: 40px;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 7px) translateZ(0);
+  fill: none;
+  stroke: var(--stroke, var(--line));
+  stroke-linecap: round;
+  stroke-width: 2px;
+  stroke-dasharray: var(--offset, 69px) 278px;
+  stroke-dashoffset: 361px;
+  transition:
+    stroke 0.25s ease var(--stroke-delay, 0s),
+    stroke-dasharray 1s;
+}
+
+.link.active {
+  --spacing: 1px;
+  --stroke: var(--line-active);
+  --stroke-delay: 0.1s;
+  --offset: 180px;
+}
+
+.link:hover {
+  --spacing: 1px;
+  --stroke: var(--line-active);
+  --stroke-delay: 0.1s;
+  --offset: 180px;
+}

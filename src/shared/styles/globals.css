@@ -10,6 +10,7 @@
 @import './components/ngprogress.css';
 @import './components/layout.css';
 @import './components/typography.css';
+@import './components/link.css';
 
 /* pages */
 @import './pages/home-page.css';

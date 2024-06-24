@@ -16,9 +16,14 @@ export const HeaderNavigationItem = ({
   return (
     <Link
       style={isCurrentPage ? { color: '#3ca8cb' } : undefined}
-      className={cn(className, 'text-whiter hover:text-primary transition')}
+      className={cn(className, 'link', {
+        active: isCurrentPage,
+      })}
       {...rest}
     >
+      <svg viewBox="0 0 70 36">
+        <path d="M6.9739 30.8153H63.0244C65.5269 30.8152 75.5358 -3.68471 35.4998 2.81531C-16.1598 11.2025 0.894099 33.9766 26.9922 34.3153C104.062 35.3153 54.5169 -6.68469 23.489 9.31527" />
+      </svg>
       {name}
     </Link>
   );
