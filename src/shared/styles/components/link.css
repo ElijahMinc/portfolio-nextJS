@@ -1,12 +1,10 @@
 .link {
-  --text: var(--white-color);
   --line: #b84165c2;
   --line-active: #b84165c2;
 
   display: inline-block;
   position: relative;
   text-decoration: none;
-  color: var(--text);
   margin: 0 var(--spacing, 0px);
   transition: margin 0.25s;
 }
@@ -34,6 +32,8 @@
   --stroke: var(--line-active);
   --stroke-delay: 0.1s;
   --offset: 180px;
+
+  color: #3ca8cb;
 }
 
 .link:hover {

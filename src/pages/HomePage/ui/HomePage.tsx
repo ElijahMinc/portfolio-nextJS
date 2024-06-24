@@ -89,12 +89,7 @@ const HomePage = ({ homePage }: HomePageProps) => {
             )}
           </div>
           {personUrl && (
-            <div
-              className={cn('homepage__personal-url ', {
-                hidden: theme === 'light',
-                flex: theme !== 'light',
-              })}
-            >
+            <div className={cn('homepage__personal-url')}>
               <motion.div
                 {...motionImageWrapperAnimationConfig}
                 onMouseEnter={mouseEnterHandle}

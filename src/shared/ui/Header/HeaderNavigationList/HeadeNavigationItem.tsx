@@ -15,8 +15,8 @@ export const HeaderNavigationItem = ({
 }: HeaderMobileItemProps) => {
   return (
     <Link
-      style={isCurrentPage ? { color: '#3ca8cb' } : undefined}
-      className={cn(className, 'link', {
+      // style={isCurrentPage ? { color: '#3ca8cb' } : undefined}
+      className={cn(className, 'dark:text-white text-black link', {
         active: isCurrentPage,
       })}
       {...rest}
