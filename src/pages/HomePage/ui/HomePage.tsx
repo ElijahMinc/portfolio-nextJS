@@ -10,20 +10,15 @@ import { HomePageProps } from '../types/props';
 import Image from 'next/image';
 import { imageQuality } from '@/shared/constants/images';
 import { useCursor } from '@/entities/Cursor';
-import { useTheme } from '@/entities/Theme/lib/useTheme';
 import { useTextAnimation } from '@/shared/hooks';
 import { withParticles } from '@/entities/Particles';
-import {
-  motionImageContainerAnimationConfig,
-  motionImageWrapperAnimationConfig,
-  motionSectionAnimationConfig,
-} from '../config/motion-animation';
+import { motionSectionAnimationConfig } from '../config/motion-animation';
 import { transition1 } from '@/shared/constants/transitions';
+import { SmoothMovementWrapper } from '@/entities/Animation/SmoothMovementByMouse';
 
 import cn from 'classnames';
 
 const HomePage = ({ homePage }: HomePageProps) => {
-  const { theme } = useTheme();
   const titleRef = useRef(null);
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
   const title = homePage?.fields?.title;
@@ -90,25 +85,21 @@ const HomePage = ({ homePage }: HomePageProps) => {
           </div>
           {personUrl && (
             <div className={cn('homepage__personal-url')}>
-              <motion.div
-                {...motionImageWrapperAnimationConfig}
-                onMouseEnter={mouseEnterHandle}
-                onMouseLeave={mouseLeaveHandle}
-                className="homepage__image-wrapper"
-              >
-                <motion.div
-                  {...motionImageContainerAnimationConfig}
-                  className="homepage__image-container"
-                >
-                  <Image
-                    quality={imageQuality}
-                    className="object-cover"
-                    fill
-                    src={`https:${personUrl}`}
-                    alt="Ilya_Prtosenko_Frontend"
-                  />
-                </motion.div>
-              </motion.div>
+              <div className="homepage__image-wrapper">
+                <SmoothMovementWrapper className="w-full h-full">
+                  <div className="homepage__image-container">
+                    <Image
+                      quality={imageQuality}
+                      className="object-cover"
+                      onMouseEnter={mouseEnterHandle}
+                      onMouseLeave={mouseLeaveHandle}
+                      fill
+                      src={`https:${personUrl}`}
+                      alt="Ilya_Prtosenko_Frontend"
+                    />
+                  </div>
+                </SmoothMovementWrapper>
+              </div>
             </div>
           )}
         </div>

@@ -13,6 +13,7 @@ import {
 } from '../config/motion-animation';
 
 import cn from 'classnames';
+import { SmoothMovementWrapper } from '@/entities/Animation/SmoothMovementByMouse';
 
 const Contact = ({ contactPage }: ContactPageProps) => {
   const { mouseEnterHandle, mouseLeaveHandle } = useCursor();
@@ -42,7 +43,7 @@ const Contact = ({ contactPage }: ContactPageProps) => {
             ['justify-center']: !personImg,
           })}
         >
-          <div className="contact-page__cover" />
+          <SmoothMovementWrapper className="contact-page__cover w-screen" />
 
           {/* text & form */}
           <div

@@ -13,6 +13,7 @@ import { withParticles } from '@/entities/Particles';
 import { motionImageWrapperAnimationConfig } from '../config/motion-animation';
 
 import cn from 'classnames';
+import { SmoothMovementWrapper } from '@/entities/Animation/SmoothMovementByMouse';
 
 const About = ({ aboutPage }: AboutPageProps) => {
   const titleRef = useRef(null);
@@ -42,21 +43,19 @@ const About = ({ aboutPage }: AboutPageProps) => {
 
         <div className="aboutpage__body">
           {personImg && (
-            <motion.div
-              {...motionImageWrapperAnimationConfig}
-              onMouseEnter={mouseEnterHandle}
-              onMouseLeave={mouseLeaveHandle}
-              transition={transition1}
-              className="aboutpage__image-wrapper"
-            >
-              <Image
-                quality={imageQuality}
-                className="object-cover"
-                fill
-                src={`https:${personImg}`}
-                alt="Ilya_Prtosenko_Frontend"
-              />
-            </motion.div>
+            <SmoothMovementWrapper>
+              <div className="aboutpage__image-wrapper">
+                <Image
+                  quality={imageQuality}
+                  onMouseEnter={mouseEnterHandle}
+                  onMouseLeave={mouseLeaveHandle}
+                  className="object-cover"
+                  fill
+                  src={`https:${personImg}`}
+                  alt="Ilya_Prtosenko_Frontend"
+                />
+              </div>
+            </SmoothMovementWrapper>
           )}
 
           {/* text */}

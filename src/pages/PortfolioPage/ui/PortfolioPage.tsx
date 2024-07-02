@@ -4,11 +4,8 @@ import { BLOCKS } from '@contentful/rich-text-types';
 import { useState } from 'react';
 import { getDocumentToHtmlString } from '@/shared/lib/documentToHtmlString/getDocumentToHtmlString';
 import { PortfolioPageProps } from '../types/props';
-import Image from 'next/image';
 import { useCursor } from '@/entities/Cursor';
 import { withParticles } from '@/entities/Particles';
-
-import cn from 'classnames';
 import {
   motionPreviewWorkAnimationConfig,
   motionSectionAnimationConfig,
@@ -16,10 +13,9 @@ import {
 } from '../config/motion-animation';
 import {
   ICurrentWork,
-  IPreviewWorkLinks,
   PreviewPortfolioWorksList,
-} from '@/entities/PreviewPortfolioWorks/ui/PreviewPortfolioWorksList';
-import { getMappedCurrentWork } from '@/entities/PreviewPortfolioWorks/utils/mappedCurrentWork';
+} from '@/widgets/PreviewPortfolioWorks/ui/PreviewPortfolioWorksList';
+import { getMappedCurrentWork } from '@/widgets/PreviewPortfolioWorks/utils/mappedCurrentWork';
 
 const Portfolio = ({ portfolioPage, videosContent }: PortfolioPageProps) => {
   const title = portfolioPage.fields?.title || null;

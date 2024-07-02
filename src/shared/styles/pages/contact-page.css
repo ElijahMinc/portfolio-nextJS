@@ -11,7 +11,7 @@
 }
 
 .contact-page__cover {
-  @apply hidden lg:flex bg-[#eef7f959] absolute bottom-0 left-0 right-0 top-72 pointer-events-none;
+  @apply hidden lg:flex dark:bg-[#eef7f959] bg-[#6f6f6f59] absolute bottom-0 left-0 right-0 top-72 pointer-events-none;
 }
 
 .contact-page__form-wrapper {
