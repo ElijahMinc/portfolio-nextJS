@@ -1,9 +1,5 @@
 export const headerNavigationList = [
 	{
-		path: '/',
-		name: 'Home'
-	},
-	{
 		path: '/about',
 		name: 'About'
 	},

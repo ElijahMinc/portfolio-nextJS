@@ -5,10 +5,6 @@ export interface HeaderNavigationListData {
 
 export const headerNavigationList: HeaderNavigationListData[] = [
   {
-    path: '/',
-    name: 'Home',
-  },
-  {
     path: '/about',
     name: 'About',
   },
